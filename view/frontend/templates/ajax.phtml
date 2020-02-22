@@ -1,0 +1,56 @@
+<?php
+/*
+ * @category: Magepow
+ * @copyright: Copyright (c) 2014 Magepow (http://www.magepow.com/)
+ * @licence: http://www.magepow.com/license-agreement
+ * @author: MichaelHa
+ * @create date: 2019-06-14 17:19:50
+ * @LastEditors: DavidDuong
+ * @LastEditTime: 2019-07-19 10:36:09
+ */
+?>
+<?php
+$helper = $block->getAjaxHelper();
+$addUrl = $block->getUrl('ajaxcart');
+$quickview = 'false';
+$isProductView = 'false';
+$countDown = ($helper->getCountDownTime() > 0) ? $helper->getCountDownTime() : 0;
+
+if ($block->getRequest()->getModuleName() == 'ajaxcart') {
+    $quickview = 'true';
+    $isProductView = 'true';
+}
+
+if ($block->getRequest()->getFullActionName() == 'catalog_product_view') {
+    $isProductView = 'true';
+}
+
+$isEnable = $helper->isEnabled();
+
+if ($isProductView == 'true' && !$helper->isEnabledProductView()) {
+    $isEnable = false;
+}
+
+if ($block->getRequest()->getFullActionName() == 'checkout_cart_index'
+    || $block->getRequest()->getFullActionName() == 'wishlist_index_index'
+    || $block->getRequest()->getFullActionName() == 'checkout_cart_configure') {
+    $isEnable = false;
+}
+?>
+
+<?php if ($isEnable) :?>
+    <div id="magepow_ajaxcart_popup"></div>
+
+    <script type="text/x-magento-init">
+        {
+            ".page-wrapper": {
+            "magepowAjaxcart": {
+            "addUrl": "<?php echo $block->escapeUrl($addUrl); ?>",
+            "quickViewUrl": "<?php echo $block->escapeUrl($block->getUrl('alothemes/product/view/')); ?>",
+            "addToCartSelector": "<?php echo $block->escapeJsQuote($helper->getAddToCartSelector()); ?>",
+            "countDown": "<?php echo $countDown; ?>"
+        }
+    }
+}
+</script>
+<?php endif; ?>

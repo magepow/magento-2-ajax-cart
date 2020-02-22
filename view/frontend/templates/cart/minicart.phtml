@@ -1,0 +1,41 @@
+<div id="cart-page">
+   <div id="block-cart-list" data-bind="scope:'minicart-addons'" class="block">
+       <!-- ko template: getTemplate() --><!-- /ko -->
+		<?php
+		$maxpriceShipping = $block->getConfigForShippingBar();
+		$currencySymbols = $block->getStoreCurrency();
+        $currencyCode = $block->getCurrentCurrencyCode();
+        $freeShipping_status = $block->getFreeShippingStatus();
+       ?>
+       <?php if($freeShipping_status == 1 && $maxpriceShipping != ''): ?>
+       <div class="component-wrapper" data-bind="if: getTotalCartItems() > 0">
+         <h4 data-bind="text : getpercentage() < 100 ?'Free shipping' : 'Eligible for free shipping!'"></h4>
+         
+         <span data-bind="html: cart().subtotal"></span><span> / </span>
+         <?php if(isset($currencySymbols))
+         {
+          echo $block->escapeHtml(__($currencySymbols));
+        }else{
+          echo $block->escapeHtml(__($currencyCode));
+        } ?><span data-bind="text: maxprice"></span>
+         <div class="minprogress" id="progress">
+           <div class="minprogress-active" id="child-progress" data-bind="style: { width: getpercentage() + '%' } "></div>
+         </div>
+       </div>
+
+       <script>
+           maxpriceShipping = <?= /* @escapeNotVerified */ $maxpriceShipping ?>;
+       </script>
+       <script type="text/x-magento-init">
+         {
+             "#block-cart-list": {
+                 "Magento_Ui/js/core/app": <?php /* @escapeNotVerified */ echo $block->getJsLayout();?>
+             },
+             "*": {
+                 "Magento_Ui/js/block-loader": "<?= /* @escapeNotVerified */ $block->getViewFileUrl('images/loader-1.gif') ?>"
+             }
+         }
+     </script>
+      <?php endif; ?>
+   </div>
+</div>

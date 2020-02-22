@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <ajaxcart>
+            <general>
+                <active>1</active>
+                <active_product_view>1</active_product_view>
+                <selector>.action.tocart</selector>
+            </general>
+            <success_popup>
+            	<product_image>1</product_image>
+            	<product_image_width>100</product_image_width>
+            	<product_image_height>150</product_image_height>
+            	<product_price>0</product_price>
+            	<continue_button>1</continue_button>
+            	<active_countdown>1</active_countdown>
+            	<countdown_time>5</countdown_time>
+            	<mini_cart>1</mini_cart>
+            	<mini_checkout>1</mini_checkout>
+            	<suggest_product>0</suggest_product>
+            	<suggest_source>0</suggest_source>
+            	<suggest_limit>5</suggest_limit>
+            </success_popup>
+            <success_popup_design>
+            	<button_text_color>#ffffff</button_text_color>
+            	<continue_text>Continue Shopping</continue_text>
+            	<continue>#b59677</continue>
+            	<continue_hover>#b59677</continue_hover>
+            	<viewcart_text>View Cart</viewcart_text>
+            	<viewcart>#b59677</viewcart>
+            	<viewcart_hover>#b59677</viewcart_hover>
+                <freeShipping_message>Ajaxcart - module, you can put own text in configuration</freeShipping_message>
+                <congratulation>CONGRATULATIONS! YOU'VE GOT FREE SHIPPING!</congratulation>
+            </success_popup_design>
+            <quickview_popup>
+                <go_to_product>1</go_to_product>
+                <additional_data>0</additional_data>
+            </quickview_popup>
+            <addtocart_bottom>
+                <active_addtocart_bottom>1</active_addtocart_bottom>
+                <height_scroll>830</height_scroll>
+            </addtocart_bottom>
+        </ajaxcart>
+    </default>
+</config>

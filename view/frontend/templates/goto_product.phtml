@@ -1,0 +1,25 @@
+<?php
+/*
+ * @category: Magepow
+ * @copyright: Copyright (c) 2014 Magepow (http://www.magepow.com/)
+ * @licence: http://www.magepow.com/license-agreement
+ * @author: MichaelHa
+ * @create date: 2019-06-14 17:19:50
+ * @LastEditors: MichaelHa
+ * @LastEditTime: 2019-06-29 12:47:50
+ */
+?>
+<?php $product = $block->getProduct(); ?>
+<div id="ajax-goto">
+	<a class="goto-product" href="<?php echo $block->escapeUrl($product->getUrlModel()->getUrl($product));?>">
+		<span><?php echo $block->escapeHtml(__('Go to Product')); ?></span>
+	</a>
+</div>
+
+<script type="text/x-magento-init">
+	{
+		"#ajax-goto": {
+		"magepowGoto": {}
+	}
+}
+</script>

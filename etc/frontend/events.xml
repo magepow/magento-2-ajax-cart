@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+	<event name="layout_generate_blocks_after">
+		<observer name="additional_remove_handle" instance="Magepow\Ajaxcart\Model\Observer\AdditionalCheck" />
+	</event>
+	<event name="checkout_cart_product_add_after">
+		<observer name="product_add_to_cart_after_handle"
+			instance="Magepow\Ajaxcart\Model\Observer\ProductAddToCartAfter" />
+	</event>
+</config>

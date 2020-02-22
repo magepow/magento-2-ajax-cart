@@ -1,0 +1,38 @@
+<?php
+/*
+ * @category: Magepow
+ * @copyright: Copyright (c) 2014 Magepow (http://www.magepow.com/)
+ * @licence: http://www.magepow.com/license-agreement
+ * @author: MichaelHa
+ * @create date: 2019-06-14 17:19:50
+ * @LastEditors: DavidDuong
+ * @LastEditTime: 2019-07-22 13:40:34
+ */
+?>
+<?php
+$helper = $block->getAjaxHelper();
+$btnTextColor = $helper->getBtnTextColor();
+$btnContinueBackground = $helper->getBtnContinueBackground();
+$btnContinueHover = $helper->getBtnContinueHover();
+$btnViewcartBackground = $helper->getBtnViewcartBackground();
+$btnViewcartHover = $helper->getBtnViewcartHover();
+?>
+<style>
+    .content-quickview .btn-continue .continue {
+        background:#<?php echo $block->escapeHtml($btnContinueBackground); ?>;
+        color:#<?php echo $block->escapeHtml($btnTextColor); ?>;
+    }
+
+    .content-quickview .btn-continue .continue:hover {
+        background:#<?php echo $block->escapeHtml($btnContinueHover); ?>;
+    }
+
+    .content-quickview .btn-viewcart .viewcart {
+        background:#<?php echo $block->escapeHtml($btnViewcartBackground); ?>;
+        color:#<?php echo $block->escapeHtml($btnTextColor); ?>;
+    }
+
+    .content-quickview .btn-viewcart .viewcart:hover {
+        background:#<?php echo $block->escapeHtml($btnViewcartHover); ?>;
+    }
+</style>

@@ -1,0 +1,263 @@
+<?php
+/*
+ * @category: Magepow
+ * @copyright: Copyright (c) 2014 Magepow (http://www.magepow.com/)
+ * @licence: http://www.magepow.com/license-agreement
+ * @author: MichaelHa
+ * @create date: 2019-06-14 17:19:50
+ * @LastEditors: DavidDuong
+ * @LastEditTime: 2019-07-21 22:50:48
+ */
+?>
+<?php
+$freeShipping_status = $block->getFreeShippingStatus();
+$currencySymbols = $block->getStoreCurrency();
+$currencyCode = $block->getCurrentCurrencyCode();
+$freeShipping = $block->getFreeShippingValue();
+$helper = $block->getAjaxHelper();
+$imageHelper = $block->getImageHelper();
+$resultItem = $block->getItem();
+$product = $resultItem->getProduct();
+$resultPrice = $helper->getProductTaxDisplayType() == \Magento\Tax\Model\Config::DISPLAY_TYPE_EXCLUDING_TAX ?
+$resultItem->getPrice() : $resultItem->getPriceInclTax();
+$cart = $block->getCartHelper()->getCart();
+$showContinue = $helper->isShowContinueBtn();
+$showCartInfo = $helper->isShowCartInfo();
+$showCheckoutLink = $helper->isShowCheckoutLink();
+$freeShipping_message = $helper->getFreeShippingMessageText();
+$congratulation_message = $helper->getCongratulationMessageText();
+$countDown = ($helper->getCountDownTime() > 0) ? $helper->getCountDownTime() : 0;
+?>
+<div class="popup">
+    <div class="block">
+        <div class="header">
+            <strong><?php echo $block->escapeHtml(__('Shopping Cart')); ?></strong>
+        </div>
+        <p class="message">
+            <?php echo $block->escapeHtml(__('Item was successfully added to your cart')); ?>
+
+        </p>
+    <div class="product-item">
+        <?php if ($helper->isShowProductImage()) :?>
+            <div class="product-image product-item-photo">
+                <img src="<?php echo $block->escapeUrl(
+                $imageHelper->init(
+                $product,
+                'category_page_list',
+                ['height' => $helper->getImageHeight() , 'width'=> $helper->getImageWidth()]
+                )->getUrl()
+                ); ?>">
+                <?php if ($helper->isShowProductPrice() && $product->getTypeId() != \Magento\GroupedProduct\Model\Product\Type\Grouped::TYPE_CODE) :?>
+                <div>
+                    <span>
+                        <?php
+                        echo $block->escapeHtml(
+                            $block->getPricingHelper()->currency(
+                                $resultPrice,
+                                true,
+                                false
+                            )
+                        );
+                        ?>
+                    </span>
+                </div>
+            <?php endif; ?>
+        </div>
+    <?php endif; ?>
+    
+    	<div class="product-item-details">
+	        <strong class="product-item-name"><a href="<?php echo $block->escapeUrl($product->getProductUrl()); ?>"><?php echo $block->escapeHtml($resultItem->getName()); ?></a></strong>
+	        <div class="product-price"><?php if(isset($currencySymbols))
+	                        {
+	                            echo $block->escapeHtml(__($currencySymbols));
+	                        }else{
+	                            echo $block->escapeHtml(__($currencyCode));
+	                        } echo $block->escapeHtml($resultItem->getPrice()); ?></div>
+
+	        <input id="custom_Qty" type="number" class="fakeQtycart" min="1" oninput="validity.valid||(value='');" value="<?php echo $block->escapeHtml($resultItem->getQty()); ?>" data-original-value="<?php echo $block->escapeHtml($resultItem->getQty()); ?>" name="custom_Qty">
+
+	        <button class="fakeUpdateCart">Update</button>
+    	</div>
+    </div>
+    <?php if ($showCartInfo || $showCheckoutLink) :?>
+        <div class="cart-info">
+            <?php if ($showCartInfo) : ?>
+                <div class="items-count">
+                    <span>
+                        <?php
+                        if ($cart->getItemsQty() > 1) {
+                            echo $block->escapeHtml(__('There are '));
+                        } else {
+                            echo $block->escapeHtml(__('There is '));
+                        }
+                        ?>
+                        <a href="<?php echo $block->escapeUrl($block->getUrl('checkout/cart')); ?>">
+                            <?php
+                            echo $block->escapeHtml($cart->getItemsQty());
+                            if ($cart->getItemsQty() > 1) {
+                                echo $block->escapeHtml(__(' items'));
+                            } else {
+                                echo $block->escapeHtml(__(' item'));
+                            }
+                            ?>
+                        </a>
+                        <?php echo $block->escapeHtml(__(' in your cart.')); ?>
+                    </span>
+                </div>
+                <div class="subtotal">
+                    <span>
+                        <?php
+                        $quote = $block->getCartHelper()->getQuote();
+                        echo $block->escapeHtml(__('Cart Subtotal: '));
+                        if(isset($currencySymbols))
+                        {
+                            echo $block->escapeHtml(__($currencySymbols));
+                        }else{
+                            echo $block->escapeHtml(__($currencyCode));
+                        }
+                        echo $block->escapeHtml(__($quote->getSubtotal()));
+                        ?>
+                    </span>
+                </div>
+            <?php endif; ?>
+            <?php
+            if($freeShipping_status == 1)
+            {
+                $quote = $block->getCartHelper()->getQuote();
+                $total = $quote->getSubtotal();
+                $freeShipping = $block->getPricingHelper()->currency(
+                    $freeShipping,
+                    false,
+                    false
+                );
+                $needMore = $freeShipping - $total;
+                if($total < $freeShipping) {
+                    ?>
+                    <div class="freeShipping_message">
+                        <?php
+                        ?>
+                        <div class="needMore">
+                            <?php
+                            if(isset($currencySymbols))
+                            {
+                                echo $block->escapeHtml(__('Spend '.$currencySymbols));
+                            }else{
+                                echo $block->escapeHtml(__('Spend '.$currencyCode));
+                            }
+                            echo $block->escapeHtml(__($needMore.' more to get free shipping!'));
+                            echo '<br>';
+                            ?>
+                        </div>
+                        <?php
+                        echo $block->escapeHtml(__($freeShipping_message));
+                        ?>
+                    </div>
+                    <?php
+                }else{
+                    ?>
+                    <div class="congratulation">
+                        <?php
+                        echo $block->escapeHtml(__($congratulation_message));
+                        ?>
+                    </div>
+                    <?php
+                }
+            }
+            ?>
+        </div>
+    <?php endif; ?>
+</div>
+
+<?php echo $block->getChildHtml('ajaxcart.popup.suggest'); ?>
+
+<div class="action clearfix">
+    <div class="btn-viewcart <?php echo (!$showContinue) ? 'full-width' : ''; ?>">
+        <a
+        href="<?php echo $block->escapeUrl($block->getUrl('checkout/cart')); ?>"
+        title="<?php echo $block->escapeHtml(__($helper->getBtnViewcartText())); ?>"
+        class="view-cart"
+        >
+        <button class="viewcart"
+        type="button"
+        title="<?php echo $block->escapeHtml(__($helper->getBtnViewcartText())); ?>">
+        <span><?php echo $block->escapeHtml(__($helper->getBtnViewcartText())); ?></span>
+        <?php if ($helper->getCountDownActive() == \Magepow\Ajaxcart\Model\Config\Source\Countdown::POPUP_COUNTDOWN_VIEW_CART_BTN
+        && $helper->getCountDownTime() > 0) :?>
+        <span class="<?php echo ($helper->getCountDownActive() == \Magepow\Ajaxcart\Model\Config\Source\Countdown::POPUP_COUNTDOWN_VIEW_CART_BTN) ? 'countdown' : ''; ?>">
+            (<?php echo $block->escapeHtml($helper->getCountDownTime()); ?>)
+        </span>
+    <?php endif; ?>
+</button>
+</a>
+</div>
+<?php if ($showCheckoutLink) : ?>
+    <div class="checkout-link">
+        <a href="<?php echo $block->escapeUrl($block->getUrl('checkout')); ?>">
+            <button class="checkout"
+            type="button"
+            title="<?php echo __('Proceed to Checkout'); ?>">
+                <span><?php echo __('Proceed to Checkout'); ?></span>
+            </button>
+        </a>
+    </div>
+<?php endif; ?>
+
+<?php if ($showContinue) : ?>
+    <div class="btn-continue">
+        <button
+        data-role="closeBtn"
+        class="continue"
+        type="button"
+        title="<?php echo $block->escapeHtml(__($helper->getBtnContinueText())); ?>"
+        >
+        <span><?php echo $block->escapeHtml(__($helper->getBtnContinueText())); ?></span>
+        <?php if ($helper->getCountDownActive() == \Magepow\Ajaxcart\Model\Config\Source\Countdown::POPUP_COUNTDOWN_CONTINUE_BTN
+        && $helper->getCountDownTime() > 0) :?>
+        <span class="<?php echo ($helper->getCountDownActive() == \Magepow\Ajaxcart\Model\Config\Source\Countdown::POPUP_COUNTDOWN_CONTINUE_BTN) ? 'countdown' : ''; ?>">
+            (<?php echo $block->escapeHtml($helper->getCountDownTime()); ?>)
+        </span>
+    <?php endif; ?>
+</button>
+</div>
+<?php endif; ?>
+</div>
+</div>
+<style type="text/css">
+    .fakeUpdateCart{
+        display: none;
+    }
+</style>
+<script type="text/javascript">
+    require([
+        'jquery'
+        ], function ($) {
+           $(document).on("click", '.action-close, .action-accept', function(){
+            var default_input = $('#cart-item-<?php echo $block->escapeHtml($resultItem->getId()); ?>-qty').val();
+                $('.fakeQtycart').val(default_input);
+            });
+
+            $(".fakeQtycart").on("keypress keyup blur",function (event) {   
+            if($('.fakeQtycart').val() == ''){
+                  $('.fakeUpdateCart').fadeOut(300);
+            } 
+            $(this).val($(this).val().replace(/[^\d].+/, ""));
+            if ((event.which <= 48 && event.which != 38 && event.which != 40 && event.which == 8 && $('.fakeQtycart').val() == '' || event.which > 57 && event.which != 38 && event.which != 40 && event.which == 8 && $('.fakeQtycart').val() == '' || event.which <= 48 && $('.fakeQtycart').val() == '' && event.which != 38 && event.which != 40 && event.which == 8 && $('.fakeQtycart').val() == '')) {
+                    event.preventDefault();
+                }else{
+                    $('.fakeUpdateCart').fadeIn(300);
+                }
+            });
+
+           $('.fakeUpdateCart').click(function(){
+            var custom_input = $('.fakeQtycart').val();
+            $('#cart-item-<?php echo $block->escapeHtml($resultItem->getId()); ?>-qty').val(custom_input);
+            $('.update-cart-item').click();
+            var $this = $(this)
+              $this.attr("disabled", "disabled");
+              setTimeout(function() {
+                $this.removeAttr("disabled");
+              }, 2000);
+            $('.fakeUpdateCart').fadeOut(2000);
+        });
+       });
+</script>

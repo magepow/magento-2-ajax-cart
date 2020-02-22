@@ -1,0 +1,106 @@
+& when (@media-common = true) {
+  .modal-content{
+    .popup{
+        .block{
+            text-align: center;
+        }
+    }
+  }
+  .freeShipping_message {
+      background-color: #d6e4f9;
+      font-size: 14px;
+      padding: 5px;
+      border-radius: 5px;
+      .needMore {
+          font-weight:bold;
+      }
+  }
+  .congratulation {
+      background-color: #f7747c;
+      font-size: 14px;
+      padding: 10px;
+      font-weight: bold;
+      color: white;
+      border-radius: 5px;
+  }
+  div.minprogress {
+      border: 1px solid #a5a5a5;
+      height: 10px;
+      border-radius: 5px;
+      position: relative;
+      .minprogress-active {
+      position: absolute;
+      background-color: #000000;
+      height: 10px;
+      border-radius: 5px;
+      }
+  }
+
+  .stickyCart {
+      position: fixed;
+      background-color: #000000;
+      width:100%;
+      bottom:0;
+      z-index: 99;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      .stickyChild{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        #timerSticky{
+            position: relative;
+        }
+        .contentHide{
+          &:not(:last-child) {
+            margin-right: 10px;
+          }
+          .btn-cart-bottom:hover{
+            background-color: #b59677;
+            color:#fff;
+          }
+          .btnCustom:hover{
+            background-color: #b59677;
+            color: #fff;
+          }
+          .stickyProductName{
+            color: #eee;
+          }
+          .btn-cart-bottom {
+            background-color: transparent;
+            height: 42px;
+            border-color: #fff;
+          }
+  
+          .btnCustom{
+            background-color: transparent;
+            height: 42px;
+            border-color: #fff;
+          }
+          .imgBorder{
+            width: 68px;
+            height: 68px;
+            padding: 3px;
+            border-radius: 50%;
+            border: solid 1px #ddd;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .stickyImg{
+              width: 60px;
+              height: 60px;
+              border-radius: 50%;
+              background-repeat: no-repeat;
+              background-position: center;
+              background-size: cover;
+            }
+          }
+        }
+      }
+      .alo-count-down{
+          position: static;
+      }
+  }
+}

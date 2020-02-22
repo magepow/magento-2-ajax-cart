@@ -1,0 +1,30 @@
+<?php 
+    $objectManager = \Magento\Framework\App\ObjectManager::getInstance();
+    $product = $objectManager->get('Magento\Framework\Registry')->registry('current_product');
+    if($product->getTypeId() == \Magento\ConfigurableProduct\Model\Product\Type\Configurable::TYPE_CODE):
+        $sizeguideBlock = $this->getLayout()->createBlock('Magento\Cms\Block\Block')->setBlockId('size_guide')->toHtml();
+        $data = $product->getTypeInstance()->getConfigurableOptions($product);
+
+        $show_size = false;
+        foreach ($data as $key => $value) {
+            if($value['0']['attribute_code'] == 'size')
+            {
+                $show_size = true;
+                break;
+            }
+        }
+    ?>
+    <?php if(isset($show_size) && $show_size != false): ?>
+    <div class="size-guide">
+        <a class="size-guide-text" ><?php echo $block->escapeHtml(__('Size Guide')); ?></a>
+        <div id="size-guide-popup" style="display: none;"><?php echo $sizeguideBlock; ?></div>
+    </div>
+    <script type="text/x-magento-init">
+        {
+            "*": {
+                "magepowSizeGuide":{}
+            }
+        }
+    </script>
+    <?php endif; ?>
+<?php endif; ?>

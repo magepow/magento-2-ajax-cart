@@ -1,0 +1,159 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="magepow" translate="label" sortOrder="300">
+             <label><![CDATA[Magepow]]></label>
+        </tab>
+        <section id="ajaxcart" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label><![CDATA[Ajax Cart]]></label>
+            <tab>magepow</tab>
+            <resource>Magepow_Ajaxcart::config_ajaxcart</resource>
+            <group id="general" translate="label" type="text" sortOrder="1" showInDefault="10" showInWebsite="1" showInStore="1">
+                <label><![CDATA[General Options]]></label>
+                <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label><![CDATA[Enabled]]></label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Choose 'Yes' to enable module.<br />Version 1.1.4]]></comment>
+                </field>
+                <!-- <field id="active_product_view" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label><![CDATA[Enabled Function in Product Page]]></label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Choose 'Yes' to enable module in product view.]]></comment>
+                </field> -->
+                <field id="selector" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label><![CDATA['Add to Cart' Button Selector]]></label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment><![CDATA[Magento default: '.action.tocart'. Change selector of 'Add to Cart' button according to theme/site.]]></comment>
+                </field>
+            </group>
+            <group id="success_popup" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label><![CDATA[Success Popup Setting]]></label>
+                <field id="product_image" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label><![CDATA[Show Product Image]]></label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="product_image_width" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label><![CDATA[Image Width (px)]]></label>
+                    <backend_model>Magepow\Ajaxcart\Model\Config\Backend\Number\GreaterThanZero</backend_model>
+                    <validate>required-entry validate-greater-than-zero</validate>
+                </field>
+                <field id="product_image_height" translate="label" type="text" sortOrder="16" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label><![CDATA[Image Height (px)]]></label>
+                    <backend_model>Magepow\Ajaxcart\Model\Config\Backend\Number\GreaterThanZero</backend_model>
+                    <validate>required-entry validate-greater-than-zero</validate>
+                </field>
+                <field id="product_price" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label><![CDATA[Show Product Price]]></label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="continue_button" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label><![CDATA[Show 'Continue' Button]]></label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="active_countdown" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label><![CDATA[Countdown time for Button]]></label>
+                    <source_model>Magepow\Ajaxcart\Model\Config\Source\Countdown</source_model>
+                </field>
+                <field id="countdown_time" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label><![CDATA[Countdown time: ...(s)]]></label>
+                    <backend_model>Magepow\Ajaxcart\Model\Config\Backend\Number\GreaterThanZero</backend_model>
+                    <validate>required-entry validate-greater-than-zero</validate>
+                </field>
+                <field id="mini_cart" translate="label" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label><![CDATA[Show Cart Quantity and Cart Subtotal]]></label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="mini_checkout" translate="label" type="select" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label><![CDATA[Show 'Go to Checkout' link]]></label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="suggest_product" translate="label" type="select" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label><![CDATA[Show Suggested Products]]></label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="suggest_title" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label><![CDATA[Title of Suggested Products Block]]></label>
+                    <depends>
+                        <field id="*/*/suggest_product">1</field>
+                    </depends>
+                </field>
+                <field id="suggest_source" translate="label" type="select" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label><![CDATA[Choose Suggested Products]]></label>
+                    <source_model>Magepow\Ajaxcart\Model\Config\Source\Suggest</source_model>
+                    <depends>
+                        <field id="*/*/suggest_product">1</field>
+                    </depends>
+                </field>
+                <field id="suggest_limit" translate="label" type="text" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label><![CDATA[Number of Suggested Products]]></label>
+                    <backend_model>Magepow\Ajaxcart\Model\Config\Backend\Number\GreaterThanZero</backend_model>
+                    <validate>required-entry validate-greater-than-zero</validate>
+                    <depends>
+                        <field id="*/*/suggest_product">1</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="success_popup_design" translate="label" type="text" sortOrder="30" showInDefault="10" showInWebsite="1" showInStore="1">
+                <label><![CDATA[Success Popup Design]]></label>
+                <field id="button_text_color" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label><![CDATA[Color of Text on Buttons]]></label>
+                    <frontend_model>Magepow\Ajaxcart\Block\Color</frontend_model>
+                </field>
+                <field id="continue_text" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label><![CDATA[Text of 'Continue' Button]]></label>
+                </field>
+                <field id="continue" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label><![CDATA['Continue' Button Color]]></label>
+                    <frontend_model>Magepow\Ajaxcart\Block\Color</frontend_model>
+                </field>
+                <field id="continue_hover" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label><![CDATA['Continue' Button Color on Hover]]></label>
+                    <frontend_model>Magepow\Ajaxcart\Block\Color</frontend_model>
+                </field>
+                <field id="viewcart_text" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label><![CDATA[Text of 'View Cart' Button]]></label>
+                </field>
+                <field id="viewcart" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label><![CDATA['View Cart' Button Color]]></label>
+                    <frontend_model>Magepow\Ajaxcart\Block\Color</frontend_model>
+                </field>
+                <field id="viewcart_hover" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label><![CDATA['View Cart' Button Color on Hover]]></label>
+                     <frontend_model>Magepow\Ajaxcart\Block\Color</frontend_model>
+                </field>
+
+                <field id="freeShipping_message" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label><![CDATA[Text of 'Free Shipping Message']]></label>
+                </field>
+
+                <field id="congratulation" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label><![CDATA[Text of 'Congratulation Message']]></label>
+                </field>
+            </group>
+            <group id="quickview_popup" translate="label" type="text" sortOrder="40" showInDefault="10" showInWebsite="1" showInStore="1">
+                <label><![CDATA[Quick View Popup Setting]]></label>
+                <field id="go_to_product" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label><![CDATA[Show 'Go to Product' link]]></label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="additional_data" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label><![CDATA[Show Additional Data]]></label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="addtocart_bottom" translate="label" type="text" sortOrder="50" showInDefault="10" showInWebsite="1" showInStore="1">
+                <label><![CDATA[General Add To Cart Bottom]]></label>
+                <field id="active_addtocart_bottom" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label><![CDATA[Enabled]]></label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="height_scroll" translate="label comment" type="text" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="70">
+                    <label>Height Scroll</label>
+                    <comment><![CDATA[Height from the top of the web page to the appearance 'add to cart bottom']]></comment>
+                    <validate>validate-number</validate>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
