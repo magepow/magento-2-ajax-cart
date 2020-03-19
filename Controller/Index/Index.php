@@ -161,6 +161,24 @@ class Index extends \Magento\Framework\App\Action\Action
     }
 
     /**
+     * Set back redirect url to response
+     *
+     * @param null|string $backUrl
+     *
+     * @return \Magento\Framework\Controller\Result\Redirect
+     */
+    protected function _goBack($backUrl = null)
+    {
+        $resultRedirect = $this->resultRedirectFactory->create();
+
+        if ($backUrl || $backUrl = $this->getBackUrl($this->_redirect->getRefererUrl())) {
+            $resultRedirect->setUrl($backUrl);
+        }
+
+        return $resultRedirect;
+    }
+
+    /**
      * Execute add to cart.
      *
      * @return $this|\Magento\Framework\App\ResponseInterface|\Magento\Framework\Controller\ResultInterface
@@ -228,12 +246,16 @@ class Index extends \Magento\Framework\App\Action\Action
 
             $result = [];
             $result['error'] = true;
-            $result['view'] = true;
+            $result['error_info'] = $e->getMessage();
             $result['id'] = $params['id'];
             $result['url'] = $this->escaper->escapeUrl(
                 $this->urlInterface->getUrl('ajaxcart/index/view', ['id' => $params['id']])
             );
 
+            $qty = isset($params['qty']) ? $params['qty'] : 1;
+            if($qty > $product->getExtensionAttributes()->getStockItem()->getQty()){
+                $result['view'] = false;
+            }
             $resultJson = $this->resultFactory->create(ResultFactory::TYPE_JSON);
             $resultJson->setData($result);
             return $resultJson;
