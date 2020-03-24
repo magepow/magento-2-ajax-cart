@@ -251,10 +251,11 @@ class Index extends \Magento\Framework\App\Action\Action
             $result['url'] = $this->escaper->escapeUrl(
                 $this->urlInterface->getUrl('ajaxcart/index/view', ['id' => $params['id']])
             );
-
-            $qty = isset($params['qty']) ? $params['qty'] : 1;
-            if($qty > $product->getExtensionAttributes()->getStockItem()->getQty()){
-                $result['view'] = false;
+            $result['view'] = true;
+            // $qty = isset($params['qty']) ? $params['qty'] : 1;
+            // $stockQty = $product->getExtensionAttributes()->getStockItem()->getQty();
+            if( $product->getTypeId() == 'simple' && !$product->getData('has_options') ){
+	            $result['view'] = false;
             }
             $resultJson = $this->resultFactory->create(ResultFactory::TYPE_JSON);
             $resultJson->setData($result);
