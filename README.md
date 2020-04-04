@@ -1,5 +1,5 @@
 # Magento2 Ajaxcart
-**Ajax Cart extension** for Magento 2
+**Ajax Cart extension** for Magento 2 allows customers Add products to cart easily and quickly without reloading the page. Therefore, the extension not only enhances customer shopping experience but also reduce the bounce rate or leave the cart.
 ## 1. How to install Magento 2 Ajaxcart
 ### ✓ Install Magepow Ajaxcart via composer (recommend)
 Run the following command in Magento 2 root folder:
