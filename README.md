@@ -1,5 +1,6 @@
 # Magento2 Ajaxcart
-**Ajax Cart extension** for Magento 2 allows customers Add products to cart easily and quickly without reloading the page. Therefore, the extension not only enhances customer shopping experience but also reduce the bounce rate or leave the cart.
+**Ajax Cart extension** for Magento 2 allows customers Add products to cart easily and quickly without reloading the page. Therefore, the extension not only enhances customer shopping experience but also reduce the bounce rate or leaving the cart.
+
 ## 1. How to install Magento 2 Ajaxcart
 ### ✓ Install Magepow Ajaxcart via composer (recommend)
 Run the following command in Magento 2 root folder:
@@ -15,6 +16,15 @@ Run the following command in Magento 2 root folder:
 
 ## 3. Magepow Ajaxcart user guide
 * [Document](https://docs.alothemes.com/m2/theme/gecko/#sub72)
+To Config and Manage Ajax Cart, go to *Admin Panel > Magiccart > ALO themes > Configuration > MAGEPOW > Ajax Cart as the image below*
+![ajaxcontact_submit-img](https://github.com/magepow/magento2-ajaxcart/blob/master/media/ajaxcart_backend.png)
+
+- General Options: Allow you Enable/Disable Ajax Cart and change 'Add to Cart' Button Selector
+- Success Popup Setting: Allow you change configs for Ajax Cart such as: Show product image or not, Size of image (Width, Height), show buttons ('Continue' Button, Countdown time for Button, 'Go to Checkout' link/button, Show Cart Quantity and Cart Subtotal and allow you can show Suggested Products.
+- Success Popup Design: Allow you config style for Ajax Cart such as Color of Text on Buttons, buttons color, buttons when hover, other texts...
+Quick View Popup Setting: Allow you can show/ disable 'Go to Product' link/button and show Additional Data of that product
+- General Add To Cart Bottom
+Allow you can Enable/Disable General Add To Cart Bottom and Height Scroll (The height of screen from the top of the web page to the appearance 'add to cart bottom').
 
 **Free Extensions List**
 
