@@ -16,6 +16,9 @@ $btnContinueBackground = $helper->getBtnContinueBackground();
 $btnContinueHover = $helper->getBtnContinueHover();
 $btnViewcartBackground = $helper->getBtnViewcartBackground();
 $btnViewcartHover = $helper->getBtnViewcartHover();
+
+$countDown = ($helper->getCountDownTime() > 0) ? $helper->getCountDownTime() : 0;
+
 ?>
 <style>
     .content-quickview .btn-continue .continue {
@@ -36,3 +39,16 @@ $btnViewcartHover = $helper->getBtnViewcartHover();
         background:#<?php echo $block->escapeHtml($btnViewcartHover); ?>;
     }
 </style>
+
+<script type="text/javascript">
+    require(['jquery', 'domReady!'], function($, slick, alothemes){
+            $('body').on('contentUpdated', function () {
+                if($.magiccart) $('body').magiccart({
+                    "addUrl": "<?php echo $block->escapeUrl($block->getUrl('ajaxcart')); ?>",
+                    "quickViewUrl": "<?php echo $block->escapeUrl($block->getUrl('alothemes/product/view/')); ?>",
+                    "addToCartSelector": "<?php echo $block->escapeJsQuote($helperAjax->getAddToCartSelector()); ?>",
+                    "countDown": "<?php echo $countDown; ?>"
+                });
+            });
+    });
+</script>
