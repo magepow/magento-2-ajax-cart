@@ -15,7 +15,8 @@ Run the following command in Magento 2 root folder:
 ![ajaxcontact_submit-img](https://github.com/magepow/magento2-ajaxcart/blob/master/media/ajaxcart_frontend.png)
 
 ## 3. Magepow Ajaxcart user guide
-* [Document](https://docs.alothemes.com/m2/theme/gecko/#sub72)
+[Document](https://docs.alothemes.com/m2/theme/gecko/#sub72)
+
 To Config and Manage Ajax Cart, go to *Admin Panel > Magiccart > ALO themes > Configuration > MAGEPOW > Ajax Cart as the image below*
 ![ajaxcontact_submit-img](https://github.com/magepow/magento2-ajaxcart/blob/master/media/ajaxcart_backend.png)
 
