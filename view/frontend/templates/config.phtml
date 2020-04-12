@@ -46,7 +46,7 @@ $countDown = ($helper->getCountDownTime() > 0) ? $helper->getCountDownTime() : 0
                 if($.magiccart) $('body').magiccart({
                     "addUrl": "<?php echo $block->escapeUrl($block->getUrl('ajaxcart')); ?>",
                     "quickViewUrl": "<?php echo $block->escapeUrl($block->getUrl('alothemes/product/view/')); ?>",
-                    "addToCartSelector": "<?php echo $block->escapeJsQuote($helperAjax->getAddToCartSelector()); ?>",
+                    "addToCartSelector": "<?php echo $block->escapeJsQuote($helper->getAddToCartSelector()); ?>",
                     "countDown": "<?php echo $countDown; ?>"
                 });
             });
