@@ -16,7 +16,7 @@
         <referenceContainer name="alothemes.recent.order" remove="true"/>
         
         <referenceContainer name="content">
-            <block class="Magento\Catalog\Block\Product\View\Type\Simple" ifconfig="ajaxcart/quickview_popup/go_to_product" name="magepow.ajaxcart.goto" template="Magepow_Ajaxcart::goto_product.phtml" before="-" />
+            <block class="Magento\Catalog\Block\Product\View\Type\Simple" ifconfig="magepow_ajaxcart/quickview_popup/go_to_product" name="magepow.ajaxcart.goto" template="Magepow_Ajaxcart::goto_product.phtml" before="-" />
         </referenceContainer>
     </body>
 </page>

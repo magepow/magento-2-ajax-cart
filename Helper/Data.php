@@ -13,8 +13,7 @@ namespace Magepow\Ajaxcart\Helper;
 class Data extends \Magento\Framework\App\Helper\AbstractHelper
 {
 
-    protected $_timer  = null;
-    protected $_themeCfg = array();
+    const PRICE_SHIPPING_BAR = 'carriers/freeshipping/free_shipping_subtotal';
 
     public function __construct(
         \Magento\Framework\App\Helper\Context $context
@@ -22,47 +21,18 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     {
         parent::__construct($context);
     }
-    public function getConfig($cfg='')
+    
+    /**
+    * Return if maximum price for shipping bar
+    * @return int
+    */
+    public function getPriceForShippingBar()
     {
-        if($cfg) return $this->scopeConfig->getValue( $cfg, \Magento\Store\Model\ScopeInterface::SCOPE_STORE );
-        return $this->scopeConfig;
+        return $this->scopeConfig->getValue(
+            self::PRICE_SHIPPING_BAR,
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
     }
-
-    public function getThemeCfg($cfg='')
-    {
-        if(!$this->_themeCfg) $this->_themeCfg = $this->getConfig('alothemes');
-        if(!$cfg) return $this->_themeCfg;
-        elseif(isset($this->_themeCfg[$cfg])) return $this->_themeCfg[$cfg];
-    }
-
-    public function getTimer($_product)
-    {
-        if($this->_timer==null) $this->_timer = $this->getThemeCfg('timer');
-        if(!$this->_timer['enabled']) return;
-        $toDate = $_product->getSpecialToDate();
-        if(!$toDate) return;
-        if($_product->getPrice() < $_product->getSpecialPrice()) return;
-        if($_product->getSpecialPrice() == 0 || $_product->getSpecialPrice() == "") return;
-        $timer = strtotime($toDate) - strtotime("now");
-        return '<div class="alo-count-down"><div class="countdown" data-timer="' .$timer. '"></div></div>';
-
-        $now = new \DateTime();
-        $ends = new \DateTime($toDate);
-        $left = $now->diff($ends);
-        return '<div class="alo-count-down"><span class="countdown" data-d="' .$left->format('%a'). '" data-h="' .$left->format('%h'). '" data-i="' .$left->format('%h'). '" data-s="' .$left->format('%s'). '"></span></div>';
-    }
-     const PRICE_SHIPPING_BAR = 'carriers/freeshipping/free_shipping_subtotal';
-       /**
-        * Return if maximum price for shipping bar
-        * @return int
-        */
-       public function getPriceForShippingBar()
-       {
-         return $this->scopeConfig->getValue(
-             self::PRICE_SHIPPING_BAR,
-             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-         );
-     }
     /**
      * Is ajax cart enabled.
      *
@@ -71,7 +41,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     public function isEnabled()
     {
         return $this->scopeConfig->isSetFlag(
-            'ajaxcart/general/active',
+            'magepow_ajaxcart/general/enabled',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
     }
@@ -84,7 +54,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     public function isEnabledProductView()
     {
         return $this->scopeConfig->isSetFlag(
-            'ajaxcart/general/active_product_view',
+            'magepow_ajaxcart/general/enabled_product_view',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
     }
@@ -97,7 +67,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     public function getAddToCartSelector()
     {
         return $this->scopeConfig->getValue(
-            'ajaxcart/general/selector',
+            'magepow_ajaxcart/general/selector',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
     }
@@ -110,7 +80,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     public function isShowProductImage()
     {
         return $this->scopeConfig->isSetFlag(
-            'ajaxcart/success_popup/product_image',
+            'magepow_ajaxcart/success_popup/product_image',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
     }
@@ -123,7 +93,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     public function getImageWidth()
     {
         return $this->scopeConfig->getValue(
-            'ajaxcart/success_popup/product_image_width',
+            'magepow_ajaxcart/success_popup/product_image_width',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
     }
@@ -136,7 +106,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     public function getImageHeight()
     {
         return $this->scopeConfig->getValue(
-            'ajaxcart/success_popup/product_image_height',
+            'magepow_ajaxcart/success_popup/product_image_height',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
     }
@@ -149,7 +119,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     public function isShowProductPrice()
     {
         return $this->scopeConfig->isSetFlag(
-            'ajaxcart/success_popup/product_price',
+            'magepow_ajaxcart/success_popup/product_price',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
     }
@@ -162,20 +132,20 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     public function isShowContinueBtn()
     {
         return $this->scopeConfig->isSetFlag(
-            'ajaxcart/success_popup/continue_button',
+            'magepow_ajaxcart/success_popup/continue_button',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
     }
 
     /**
-     * Get countdown active for which button.
+     * Get countdown enabled for which button.
      *
      * @return string
      */
     public function getCountDownActive()
     {
         return $this->scopeConfig->getValue(
-            'ajaxcart/success_popup/active_countdown',
+            'magepow_ajaxcart/success_popup/enabled_countdown',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
     }
@@ -188,7 +158,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     public function getCountDownTime()
     {
         return $this->scopeConfig->getValue(
-            'ajaxcart/success_popup/countdown_time',
+            'magepow_ajaxcart/success_popup/countdown_time',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
     }
@@ -201,7 +171,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     public function isShowCartInfo()
     {
         return $this->scopeConfig->isSetFlag(
-            'ajaxcart/success_popup/mini_cart',
+            'magepow_ajaxcart/success_popup/mini_cart',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
     }
@@ -214,7 +184,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     public function isShowCheckoutLink()
     {
         return $this->scopeConfig->isSetFlag(
-            'ajaxcart/success_popup/mini_checkout',
+            'magepow_ajaxcart/success_popup/mini_checkout',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
     }
@@ -227,7 +197,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     public function isShowSuggestBlock()
     {
         return $this->scopeConfig->isSetFlag(
-            'ajaxcart/success_popup/suggest_product',
+            'magepow_ajaxcart/success_popup/suggest_product',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
     }
@@ -240,7 +210,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     public function getSuggestTitle()
     {
         return $this->scopeConfig->getValue(
-            'ajaxcart/success_popup/suggest_title',
+            'magepow_ajaxcart/success_popup/suggest_title',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
     }
@@ -253,7 +223,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     public function getSuggestSource()
     {
         return $this->scopeConfig->getValue(
-            'ajaxcart/success_popup/suggest_source',
+            'magepow_ajaxcart/success_popup/suggest_source',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
     }
@@ -266,7 +236,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     public function getSuggestLimit()
     {
         return $this->scopeConfig->getValue(
-            'ajaxcart/success_popup/suggest_limit',
+            'magepow_ajaxcart/success_popup/suggest_limit',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
     }
@@ -279,7 +249,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     public function getBtnTextColor()
     {
         $color = $this->scopeConfig->getValue(
-            'ajaxcart/success_popup_design/button_text_color',
+            'magepow_ajaxcart/success_popup_design/button_text_color',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
 
@@ -295,7 +265,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     public function getBtnContinueText()
     {
         return $this->scopeConfig->getValue(
-            'ajaxcart/success_popup_design/continue_text',
+            'magepow_ajaxcart/success_popup_design/continue_text',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
     }
@@ -308,7 +278,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     public function getBtnContinueBackground()
     {
         $backGround = $this->scopeConfig->getValue(
-            'ajaxcart/success_popup_design/continue',
+            'magepow_ajaxcart/success_popup_design/continue',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
 
@@ -324,7 +294,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     public function getBtnContinueHover()
     {
         $hover = $this->scopeConfig->getValue(
-            'ajaxcart/success_popup_design/continue_hover',
+            'magepow_ajaxcart/success_popup_design/continue_hover',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
 
@@ -340,7 +310,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     public function getBtnViewcartText()
     {
         return $this->scopeConfig->getValue(
-            'ajaxcart/success_popup_design/viewcart_text',
+            'magepow_ajaxcart/success_popup_design/viewcart_text',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
     }
@@ -353,7 +323,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     public function getBtnViewcartBackground()
     {
         $backGround = $this->scopeConfig->getValue(
-            'ajaxcart/success_popup_design/viewcart',
+            'magepow_ajaxcart/success_popup_design/viewcart',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
 
@@ -369,7 +339,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     public function getBtnViewcartHover()
     {
         $hover = $this->scopeConfig->getValue(
-            'ajaxcart/success_popup_design/viewcart_hover',
+            'magepow_ajaxcart/success_popup_design/viewcart_hover',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
 
@@ -385,7 +355,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     public function getFreeShippingMessageText()
     {
         return $this->scopeConfig->getValue(
-            'ajaxcart/success_popup_design/freeShipping_message',
+            'magepow_ajaxcart/success_popup_design/freeShipping_message',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
     }
@@ -398,7 +368,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     public function getCongratulationMessageText()
     {
         return $this->scopeConfig->getValue(
-            'ajaxcart/success_popup_design/congratulation',
+            'magepow_ajaxcart/success_popup_design/congratulation',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
     }
@@ -411,7 +381,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     public function isShowQuickviewGotoLink()
     {
         return $this->scopeConfig->isSetFlag(
-            'ajaxcart/quickview_popup/go_to_product',
+            'magepow_ajaxcart/quickview_popup/go_to_product',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
     }
@@ -424,7 +394,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     public function isShowQuickviewAddData()
     {
         return $this->scopeConfig->isSetFlag(
-            'ajaxcart/quickview_popup/additional_data',
+            'magepow_ajaxcart/quickview_popup/additional_data',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
     }
@@ -438,14 +408,6 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     {
         return $this->scopeConfig->getValue(
             'tax/display/type',
-            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-        );
-    }
-
-    public function getHeightScroll()
-    {
-        return $this->scopeConfig->getValue(
-            'ajaxcart/addtocart_bottom/height_scroll',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
     }

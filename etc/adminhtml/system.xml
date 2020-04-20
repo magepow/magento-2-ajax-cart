@@ -4,18 +4,18 @@
         <tab id="magepow" translate="label" sortOrder="300">
              <label><![CDATA[Magepow]]></label>
         </tab>
-        <section id="ajaxcart" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+        <section id="magepow_ajaxcart" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
             <label><![CDATA[Ajax Cart]]></label>
             <tab>magepow</tab>
             <resource>Magepow_Ajaxcart::config_ajaxcart</resource>
             <group id="general" translate="label" type="text" sortOrder="1" showInDefault="10" showInWebsite="1" showInStore="1">
                 <label><![CDATA[General Options]]></label>
-                <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label><![CDATA[Enabled]]></label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                    <comment><![CDATA[Choose 'Yes' to enable module.<br />Version 1.1.4]]></comment>
+                    <comment><![CDATA[Choose 'Yes' to enable module.<br />]]></comment>
                 </field>
-                <!-- <field id="active_product_view" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <!-- <field id="enabled_product_view" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label><![CDATA[Enabled Function in Product Page]]></label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <comment><![CDATA[Choose 'Yes' to enable module in product view.]]></comment>
@@ -50,7 +50,7 @@
                     <label><![CDATA[Show 'Continue' Button]]></label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
-                <field id="active_countdown" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="enabled_countdown" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label><![CDATA[Countdown time for Button]]></label>
                     <source_model>Magepow\Ajaxcart\Model\Config\Source\Countdown</source_model>
                 </field>
@@ -139,19 +139,6 @@
                 <field id="additional_data" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label><![CDATA[Show Additional Data]]></label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                </field>
-            </group>
-            <group id="addtocart_bottom" translate="label" type="text" sortOrder="50" showInDefault="10" showInWebsite="1" showInStore="1">
-                <label><![CDATA[General Add To Cart Bottom]]></label>
-                <field id="active_addtocart_bottom" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label><![CDATA[Enabled]]></label>
-                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                </field>
-
-                <field id="height_scroll" translate="label comment" type="text" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="70">
-                    <label>Height Scroll</label>
-                    <comment><![CDATA[Height from the top of the web page to the appearance 'add to cart bottom']]></comment>
-                    <validate>validate-number</validate>
                 </field>
             </group>
         </section>

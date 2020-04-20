@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
     <default>
-        <ajaxcart>
+        <magepow_ajaxcart>
             <general>
-                <active>1</active>
-                <active_product_view>1</active_product_view>
+                <enabled>1</enabled>
+                <enabled_product_view>1</enabled_product_view>
                 <selector>.action.tocart</selector>
             </general>
             <success_popup>
@@ -13,7 +13,7 @@
             	<product_image_height>150</product_image_height>
             	<product_price>0</product_price>
             	<continue_button>1</continue_button>
-            	<active_countdown>1</active_countdown>
+            	<enabled_countdown>1</enabled_countdown>
             	<countdown_time>5</countdown_time>
             	<mini_cart>1</mini_cart>
             	<mini_checkout>1</mini_checkout>
@@ -36,10 +36,6 @@
                 <go_to_product>1</go_to_product>
                 <additional_data>0</additional_data>
             </quickview_popup>
-            <addtocart_bottom>
-                <active_addtocart_bottom>1</active_addtocart_bottom>
-                <height_scroll>830</height_scroll>
-            </addtocart_bottom>
-        </ajaxcart>
+        </magepow_ajaxcart>
     </default>
 </config>
