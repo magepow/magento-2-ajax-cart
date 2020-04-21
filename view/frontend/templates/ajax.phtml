@@ -5,8 +5,8 @@
  * @licence: http://www.magepow.com/license-agreement
  * @author: MichaelHa
  * @create date: 2019-06-14 17:19:50
- * @LastEditors: DavidDuong
- * @LastEditTime: 2019-07-19 10:36:09
+ * @LastEditors: MichaelHa
+ * @LastEditTime: 2019-06-29 12:47:17
  */
 ?>
 <?php
@@ -14,7 +14,6 @@ $helper = $block->getAjaxHelper();
 $addUrl = $block->getUrl('ajaxcart');
 $quickview = 'false';
 $isProductView = 'false';
-$countDown = ($helper->getCountDownTime() > 0) ? $helper->getCountDownTime() : 0;
 
 if ($block->getRequest()->getModuleName() == 'ajaxcart') {
     $quickview = 'true';
@@ -43,12 +42,13 @@ if ($block->getRequest()->getFullActionName() == 'checkout_cart_index'
 
     <script type="text/x-magento-init">
         {
-            ".page-wrapper": {
+            "body": {
             "magepowAjaxcart": {
             "addUrl": "<?php echo $block->escapeUrl($addUrl); ?>",
+            "quickview": <?php echo $block->escapeJsQuote($quickview); ?>,
+            "isProductView": <?php echo $block->escapeJsQuote($isProductView); ?>,
             "quickViewUrl": "<?php echo $block->escapeUrl($block->getUrl('alothemes/product/view/')); ?>",
-            "addToCartSelector": "<?php echo $block->escapeJsQuote($helper->getAddToCartSelector()); ?>",
-            "countDown": "<?php echo $countDown; ?>"
+            "addToCartSelector": "<?php echo $block->escapeJsQuote($helper->getAddToCartSelector()); ?>"
         }
     }
 }

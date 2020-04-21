@@ -5,8 +5,8 @@
  * @licence: http://www.magepow.com/license-agreement
  * @author: MichaelHa
  * @create date: 2019-06-14 17:19:50
- * @LastEditors: DavidDuong
- * @LastEditTime: 2019-07-22 13:40:34
+ * @LastEditors: MichaelHa
+ * @LastEditTime: 2019-06-29 12:47:26
  */
 ?>
 <?php
@@ -16,36 +16,34 @@ $btnContinueBackground = $helper->getBtnContinueBackground();
 $btnContinueHover = $helper->getBtnContinueHover();
 $btnViewcartBackground = $helper->getBtnViewcartBackground();
 $btnViewcartHover = $helper->getBtnViewcartHover();
-
 $countDown = ($helper->getCountDownTime() > 0) ? $helper->getCountDownTime() : 0;
-
 ?>
 <style>
-    .content-quickview .btn-continue .continue {
-        background:#<?php echo $block->escapeHtml($btnContinueBackground); ?>;
-        color:#<?php echo $block->escapeHtml($btnTextColor); ?>;
+    #magepow_ajaxcart_popup .btn-continue .continue {
+        background: #<?php echo $block->escapeHtml($btnContinueBackground); ?>;
+        color: #<?php echo $block->escapeHtml($btnTextColor); ?>;
     }
 
-    .content-quickview .btn-continue .continue:hover {
-        background:#<?php echo $block->escapeHtml($btnContinueHover); ?>;
+    #magepow_ajaxcart_popup .btn-continue .continue:hover {
+        background: #<?php echo $block->escapeHtml($btnContinueHover); ?>;
     }
 
-    .content-quickview .btn-viewcart .viewcart {
-        background:#<?php echo $block->escapeHtml($btnViewcartBackground); ?>;
-        color:#<?php echo $block->escapeHtml($btnTextColor); ?>;
+    #magepow_ajaxcart_popup .btn-viewcart .viewcart {
+        background: #<?php echo $block->escapeHtml($btnViewcartBackground); ?>;
+        color: #<?php echo $block->escapeHtml($btnTextColor); ?>;
     }
 
-    .content-quickview .btn-viewcart .viewcart:hover {
-        background:#<?php echo $block->escapeHtml($btnViewcartHover); ?>;
+    #magepow_ajaxcart_popup .btn-viewcart .viewcart:hover {
+        background: #<?php echo $block->escapeHtml($btnViewcartHover); ?>;
     }
 </style>
 
 <script type="text/javascript">
-    require(['jquery', 'domReady!'], function($, slick, alothemes){
+    require(['jquery', 'magepowAjaxcart', 'domReady!'], function($, magepowAjaxcart){
             $('body').on('contentUpdated', function () {
                 if($.magiccart) $('body').magiccart({
                     "addUrl": "<?php echo $block->escapeUrl($block->getUrl('ajaxcart')); ?>",
-                    "quickViewUrl": "<?php echo $block->escapeUrl($block->getUrl('alothemes/product/view/')); ?>",
+                    "quickViewUrl": "<?php echo $block->escapeUrl($block->getUrl('ajaxcart/product/view/')); ?>",
                     "addToCartSelector": "<?php echo $block->escapeJsQuote($helper->getAddToCartSelector()); ?>",
                     "countDown": "<?php echo $countDown; ?>"
                 });

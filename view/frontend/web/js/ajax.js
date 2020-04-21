@@ -1,16 +1,17 @@
 define([
     'jquery',
-    'jquery/ui',
     'Magento_Ui/js/modal/modal'
-    ], function ($, jui, modal) {
+    ], function ($, modal) {
         'use strict';
 
         $.widget('magepow.ajaxcart', {
             options: {
                 addUrl: '',
+                quickview: false,
+                isProductView: false,
+                isSuggestPopup: false,
                 quickViewUrl: '',
-                addToCartSelector: '.action.tocart',
-                countDown: ''
+                addToCartSelector: '.action.tocart'
             },
 
             productIdInputName: ["product", "product-id", "data-product-id", "data-product"],
@@ -24,24 +25,20 @@ define([
                 var options = this.options;
                 var self = this;
 
-                var _qsModalContent = '<div class="content-ajaxcart">ajaxcart placeholder</div>'; 
-                if(!$('#modals_ajaxcart').length){
-                    $(document.body).append('<div id="modals_ajaxcart" style="display:none">' + _qsModalContent + '</div>');
-                }
-
-                $(options.addToCartSelector).off('click');
-                $(options.addToCartSelector).unbind( "click" ).click(function (e) {
+                self.element.find(options.addToCartSelector).off('click');
+                self.element.find(options.addToCartSelector).click(function (e) {
                     e.preventDefault();
+
                     var form = $(this).parents('form').get(0);
-                    
                     var data = '';
                     if (form) {
-                        
                         var isValid = true;
-                        try {
-                            isValid = $(form).valid();
-                        } catch(err) {
-                            isValid = true;
+                        if (options.isProductView) {
+                            try {
+                                isValid = $(form).valid();
+                            } catch(err) {
+                                isValid = true;
+                            }
                         }
 
                         if (isValid) {
@@ -59,7 +56,12 @@ define([
                                     data += "&" + serialize;
                                 }
 
-                                self._AjaxCart(options.addUrl, data, oldAction);
+                                if (options.quickview) {
+                                    window.parent.ajaxCart._sendAjax(options.addUrl, data, oldAction);
+                                    return false;
+                                }
+
+                                self._sendAjax(options.addUrl, data, oldAction);
                                 return false;
                             }
 
@@ -71,14 +73,13 @@ define([
                             var formKey = $("input[name='form_key']").val();
                             var oldAction = dataPost.action;
                             data += 'id=' + dataPost.data.product + '&product=' + dataPost.data.product + '&form_key=' + formKey + '&uenc=' + dataPost.data.uenc;
-                            self._AjaxCart(options.addUrl, data, oldAction);
+                            self._sendAjax(options.addUrl, data, oldAction);
                             return false;
                         } else {
                             var id = self._findId(this);
                             if (id) {
                                 e.stopImmediatePropagation();
-                                /*show Quick View*/
-                                $.fn.quickview({url:options.quickViewUrl + 'id/' + id});
+                                self._requestQuickview(options.quickViewUrl + 'id/' + id);
                                 return false;
                             }
                         }
@@ -140,13 +141,9 @@ define([
                 return false;
             },
 
-            _AjaxCart: function (addUrl, data, oldAction) {
+            _sendAjax: function (addUrl, data, oldAction) {
                 var options = this.options;
                 var self = this;
-
-                if($('.modals-ajaxcart')){
-                    $('.modals-ajaxcart').remove();
-                }
 
                 $.ajax({
                     type: 'post',
@@ -165,8 +162,9 @@ define([
 
                             self._showPopup(_qsModal, _qsModalContent, data.popup);
                         } else if (data.error && data.view) {
-                            /*show Quick View*/
-                            $.fn.quickview({url:options.quickViewUrl  + 'id/' + data['id']});
+                            /*show Quick View*/ 
+                            if(data.error_info.search("not available") == -1)
+                                $.fn.quickview({url:options.quickViewUrl  + 'id/' + data['id']});
                         } else {
                             if($('.modals-ajaxcart')){
                                 $('.modals-ajaxcart').remove();
@@ -195,7 +193,7 @@ define([
                     focus:'#modals_ajaxcart .header',
                     closed: function(){
                         clearInterval(window.count);
-                    }                       	
+                    }                           
                 }, _qsModal);
                 _qsModal.modal('openModal');
                 _qsModal.trigger('contentUpdated');
@@ -217,9 +215,9 @@ define([
                         }
                     }, 1000);
                 }
-            },
-        }); 
-        
+            }
+        });
+
 $.fn.magiccart=$.magepow.ajaxcart;
 return $.magepow.ajaxcart;
 });

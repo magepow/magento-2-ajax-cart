@@ -19,7 +19,7 @@ $addUrl = $block->getUrl('ajaxcart');
         "magepowAjaxcart": {
         "addUrl": "<?php echo $block->escapeUrl($addUrl); ?>",
         "isSuggestPopup": true,
-        "quickViewUrl": "<?php echo $block->escapeUrl($block->getUrl('alothemes/product/view/id/')); ?>",
+        "quickViewUrl": "<?php echo $block->escapeUrl($block->getUrl('ajaxcart/index/view')); ?>",
         "addToCartSelector": "<?php echo $block->escapeHtml($helper->getAddToCartSelector()); ?>"
     }
 }

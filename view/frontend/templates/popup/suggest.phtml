@@ -23,8 +23,9 @@ $image = 'related_products_list';
             </strong>
         </div>
         <div class="block-content content" aria-labelledby="block-products-ordered-heading">
+            <div class="ajax-owl-loading"></div>
             <div class="wrapper grid products-grid products-products-ordered">
-                <ol class="ajax-cart-slick-slider" data-autoplay="true" data-arrows="true" data-autoplay-speed="3000" data-dots="false" data-infinite="true" data-padding="15" data-vertical="false" data-vertical-swiping="false" data-responsive='[{"breakpoint": 1921, "settings": {"slidesToShow": 1}}, {"breakpoint": 1920, "settings": {"slidesToShow": 1}}, {"breakpoint": 1480, "settings": {"slidesToShow": 2}}, {"breakpoint": 1200, "settings": {"slidesToShow": 1}}, {"breakpoint": 992, "settings": {"slidesToShow": 1}}, {"breakpoint": 768, "settings": {"slidesToShow": 1}}, {"breakpoint": 576, "settings": {"slidesToShow": 1}}, {"breakpoint": 480, "settings": {"slidesToShow": 1}}, {"breakpoint": 361, "settings": {"slidesToShow": 1}}, {"breakpoint": 1, "settings": {"slidesToShow": 1}}]' data-rows="1" data-slides-to-show="3">
+                <ol class="ajax-cart-owl-carousel">
                     <?php $iterator = 1; ?>
                     <?php $numberItem = count($items); ?>
                     <?php foreach ($items as $_item) : ?>
@@ -118,16 +119,13 @@ $image = 'related_products_list';
 
 <?php echo $block->getChildHtml('ajaxcart.popup.ajax.suggest'); ?>
 
-<script type="text/javascript">
-require([
-	'jquery',
-	'magiccart/slick',
-	'alothemes',
-	], function($){
-		(function($) {
-			var ajaxslider  = $('#ajax-suggest .ajax-cart-slick-slider');
-			if(ajaxslider.length) $('head').append(magicproduct(ajaxslider, '.item'));
-		})(jQuery); 
-});
+<script type="text/x-magento-init">
+    {
+        "#ajax-suggest": {
+        "magepowProductSuggest": {
+        "itemsNumber": <?php echo $block->escapeJsQuote($numberItem); ?>
+    }
+}
+}
 </script>
 <?php endif; ?>

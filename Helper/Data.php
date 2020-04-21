@@ -13,26 +13,18 @@ namespace Magepow\Ajaxcart\Helper;
 class Data extends \Magento\Framework\App\Helper\AbstractHelper
 {
 
-    const PRICE_SHIPPING_BAR = 'carriers/freeshipping/free_shipping_subtotal';
-
-    public function __construct(
-        \Magento\Framework\App\Helper\Context $context
-    )
-    {
-        parent::__construct($context);
-    }
-    
-    /**
-    * Return if maximum price for shipping bar
-    * @return int
-    */
-    public function getPriceForShippingBar()
-    {
-        return $this->scopeConfig->getValue(
-            self::PRICE_SHIPPING_BAR,
-            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-        );
-    }
+     const PRICE_SHIPPING_BAR = 'carriers/freeshipping/free_shipping_subtotal';
+       /**
+        * Return if maximum price for shipping bar
+        * @return int
+        */
+       public function getPriceForShippingBar()
+       {
+         return $this->scopeConfig->getValue(
+             self::PRICE_SHIPPING_BAR,
+             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+         );
+     }
     /**
      * Is ajax cart enabled.
      *
@@ -86,27 +78,14 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     }
 
     /**
-     * Get product image width in success popup.
+     * Get product image size in success popup.
      *
      * @return string
      */
-    public function getImageWidth()
+    public function getImageSize()
     {
         return $this->scopeConfig->getValue(
-            'magepow_ajaxcart/success_popup/product_image_width',
-            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
-        );
-    }
-    
-    /**
-     * Get product image height in success popup.
-     *
-     * @return string
-     */
-    public function getImageHeight()
-    {
-        return $this->scopeConfig->getValue(
-            'magepow_ajaxcart/success_popup/product_image_height',
+            'magepow_ajaxcart/success_popup/product_image_size',
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
     }

@@ -3,7 +3,6 @@
     <update handle="catalog_product_view" />
     <body>
         <referenceBlock name="header.container" remove="true" />
-        <referenceBlock name="alothemes_header" remove="true" />
         <referenceBlock name="page.top" remove="true" />
         <referenceBlock name="footer-container" remove="true" />
         <referenceBlock name="copyright" remove="true" />
@@ -12,8 +11,6 @@
         <referenceBlock name="authentication-popup" remove="true" />
         <referenceBlock name="magepow.demo.notices" remove="true" />
         <referenceContainer name="product.info.social" remove="true"/>
-        <referenceContainer name="cookie_notices" remove="true"/>
-        <referenceContainer name="alothemes.recent.order" remove="true"/>
         
         <referenceContainer name="content">
             <block class="Magento\Catalog\Block\Product\View\Type\Simple" ifconfig="magepow_ajaxcart/quickview_popup/go_to_product" name="magepow.ajaxcart.goto" template="Magepow_Ajaxcart::goto_product.phtml" before="-" />

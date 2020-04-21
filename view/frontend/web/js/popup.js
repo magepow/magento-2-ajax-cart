@@ -1,6 +1,5 @@
 define([
     'jquery',
-    'magepowOwl'
     ], function ($) {
         'use strict';
 
@@ -13,8 +12,8 @@ define([
                 var self = this;
                 var options = this.options;
 
-                self.element.find('.btn-continue').click(function () {
-                    $.fancybox.close();
+                $(document).on('click', '.modals-ajaxcart .btn-continue', function() {
+                    $('.modals-ajaxcart').find('.action-close').trigger('click');   
                     clearInterval(window.count);
                 });
 

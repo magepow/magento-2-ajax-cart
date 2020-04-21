@@ -5,8 +5,8 @@
  * @licence: http://www.magepow.com/license-agreement
  * @author: MichaelHa
  * @create date: 2019-06-14 17:19:50
- * @LastEditors: DavidDuong
- * @LastEditTime: 2019-07-21 22:50:48
+ * @LastEditors: MichaelHa
+ * @LastEditTime: 2019-06-29 12:48:03
  */
 ?>
 <?php
@@ -34,17 +34,22 @@ $countDown = ($helper->getCountDownTime() > 0) ? $helper->getCountDownTime() : 0
             <strong><?php echo $block->escapeHtml(__('Shopping Cart')); ?></strong>
         </div>
         <p class="message">
-            <?php echo $block->escapeHtml(__('Item was successfully added to your cart')); ?>
-
+            <?php echo $block->escapeHtml(__('You added ')); ?>
+            <a href="<?php echo $block->escapeUrl($product->getProductUrl()); ?>"
+                title="<?php echo $block->escapeHtml($resultItem->getName()); ?>">
+                <?php echo $block->escapeHtml($resultItem->getName());?>
+            </a>
+            <?php echo $block->getRelatedAdded() ? $block->escapeHtml(__(' and related products')) : ''; ?>
+            <?php echo $block->escapeHtml(__(' to your shopping cart.')); ?>
         </p>
-    <div class="product-item">
+
         <?php if ($helper->isShowProductImage()) :?>
-            <div class="product-image product-item-photo">
+            <div class="product-image">
                 <img src="<?php echo $block->escapeUrl(
                 $imageHelper->init(
                 $product,
                 'category_page_list',
-                ['height' => $helper->getImageHeight() , 'width'=> $helper->getImageWidth()]
+                ['height' => $helper->getImageSize() , 'width'=> $helper->getImageSize()]
                 )->getUrl()
                 ); ?>">
                 <?php if ($helper->isShowProductPrice() && $product->getTypeId() != \Magento\GroupedProduct\Model\Product\Type\Grouped::TYPE_CODE) :?>
@@ -64,21 +69,7 @@ $countDown = ($helper->getCountDownTime() > 0) ? $helper->getCountDownTime() : 0
             <?php endif; ?>
         </div>
     <?php endif; ?>
-    
-    	<div class="product-item-details">
-	        <strong class="product-item-name"><a href="<?php echo $block->escapeUrl($product->getProductUrl()); ?>"><?php echo $block->escapeHtml($resultItem->getName()); ?></a></strong>
-	        <div class="product-price"><?php if(isset($currencySymbols))
-	                        {
-	                            echo $block->escapeHtml(__($currencySymbols));
-	                        }else{
-	                            echo $block->escapeHtml(__($currencyCode));
-	                        } echo $block->escapeHtml($resultItem->getPrice()); ?></div>
 
-	        <input id="custom_Qty" type="number" class="fakeQtycart" min="1" oninput="validity.valid||(value='');" value="<?php echo $block->escapeHtml($resultItem->getQty()); ?>" data-original-value="<?php echo $block->escapeHtml($resultItem->getQty()); ?>" name="custom_Qty">
-
-	        <button class="fakeUpdateCart">Update</button>
-    	</div>
-    </div>
     <?php if ($showCartInfo || $showCheckoutLink) :?>
         <div class="cart-info">
             <?php if ($showCartInfo) : ?>
@@ -164,6 +155,13 @@ $countDown = ($helper->getCountDownTime() > 0) ? $helper->getCountDownTime() : 0
                 }
             }
             ?>
+            <?php if ($showCheckoutLink) : ?>
+                <div class="checkout-link">
+                    <a href="<?php echo $block->escapeUrl($block->getUrl('checkout')); ?>">
+                        <span><?php echo $block->escapeHtml(__('Go to checkout')); ?></span>
+                    </a>
+                </div>
+            <?php endif; ?>
         </div>
     <?php endif; ?>
 </div>
@@ -190,22 +188,10 @@ $countDown = ($helper->getCountDownTime() > 0) ? $helper->getCountDownTime() : 0
 </button>
 </a>
 </div>
-<?php if ($showCheckoutLink) : ?>
-    <div class="checkout-link">
-        <a href="<?php echo $block->escapeUrl($block->getUrl('checkout')); ?>">
-            <button class="checkout"
-            type="button"
-            title="<?php echo __('Proceed to Checkout'); ?>">
-                <span><?php echo __('Proceed to Checkout'); ?></span>
-            </button>
-        </a>
-    </div>
-<?php endif; ?>
 
 <?php if ($showContinue) : ?>
     <div class="btn-continue">
         <button
-        data-role="closeBtn"
         class="continue"
         type="button"
         title="<?php echo $block->escapeHtml(__($helper->getBtnContinueText())); ?>"
@@ -222,42 +208,13 @@ $countDown = ($helper->getCountDownTime() > 0) ? $helper->getCountDownTime() : 0
 <?php endif; ?>
 </div>
 </div>
-<style type="text/css">
-    .fakeUpdateCart{
-        display: none;
+
+<script type="text/x-magento-init">
+    {
+        "#magepow_ajaxcart_popup": {
+        "magepowPopup": {
+        "countDown": <?php echo $block->escapeJsQuote($countDown); ?>
     }
-</style>
-<script type="text/javascript">
-    require([
-        'jquery'
-        ], function ($) {
-           $(document).on("click", '.action-close, .action-accept', function(){
-            var default_input = $('#cart-item-<?php echo $block->escapeHtml($resultItem->getId()); ?>-qty').val();
-                $('.fakeQtycart').val(default_input);
-            });
-
-            $(".fakeQtycart").on("keypress keyup blur",function (event) {   
-            if($('.fakeQtycart').val() == ''){
-                  $('.fakeUpdateCart').fadeOut(300);
-            } 
-            $(this).val($(this).val().replace(/[^\d].+/, ""));
-            if ((event.which <= 48 && event.which != 38 && event.which != 40 && event.which == 8 && $('.fakeQtycart').val() == '' || event.which > 57 && event.which != 38 && event.which != 40 && event.which == 8 && $('.fakeQtycart').val() == '' || event.which <= 48 && $('.fakeQtycart').val() == '' && event.which != 38 && event.which != 40 && event.which == 8 && $('.fakeQtycart').val() == '')) {
-                    event.preventDefault();
-                }else{
-                    $('.fakeUpdateCart').fadeIn(300);
-                }
-            });
-
-           $('.fakeUpdateCart').click(function(){
-            var custom_input = $('.fakeQtycart').val();
-            $('#cart-item-<?php echo $block->escapeHtml($resultItem->getId()); ?>-qty').val(custom_input);
-            $('.update-cart-item').click();
-            var $this = $(this)
-              $this.attr("disabled", "disabled");
-              setTimeout(function() {
-                $this.removeAttr("disabled");
-              }, 2000);
-            $('.fakeUpdateCart').fadeOut(2000);
-        });
-       });
+}
+}
 </script>
