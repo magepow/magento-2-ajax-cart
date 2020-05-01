@@ -89,6 +89,32 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
             \Magento\Store\Model\ScopeInterface::SCOPE_STORE
         );
     }
+    
+    /**
+     * Get product image width in success popup.
+     *
+     * @return string
+     */
+    public function getImageWidth()
+    {
+        return $this->scopeConfig->getValue(
+            'magepow_ajaxcart/success_popup/product_image_width',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
+    }
+    
+    /**
+     * Get product image height in success popup.
+     *
+     * @return string
+     */
+    public function getImageHeight()
+    {
+        return $this->scopeConfig->getValue(
+            'magepow_ajaxcart/success_popup/product_image_height',
+            \Magento\Store\Model\ScopeInterface::SCOPE_STORE
+        );
+    }
 
     /**
      * Is show added product price in success popup.

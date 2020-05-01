@@ -49,7 +49,7 @@ $countDown = ($helper->getCountDownTime() > 0) ? $helper->getCountDownTime() : 0
                 $imageHelper->init(
                 $product,
                 'category_page_list',
-                ['height' => $helper->getImageSize() , 'width'=> $helper->getImageSize()]
+                ['height' => $helper->getImageHeight() , 'width'=> $helper->getImageWidth()]
                 )->getUrl()
                 ); ?>">
                 <?php if ($helper->isShowProductPrice() && $product->getTypeId() != \Magento\GroupedProduct\Model\Product\Type\Grouped::TYPE_CODE) :?>
