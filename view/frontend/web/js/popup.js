@@ -12,7 +12,7 @@ define([
                 var self = this;
                 var options = this.options;
 
-                $(document).on('click', '.modals-ajaxcart .btn-continue', function() {
+                $('.btn-continue').on('click', function() {
                     $('.modals-ajaxcart').find('.action-close').trigger('click');   
                     clearInterval(window.count);
                 });
@@ -22,9 +22,9 @@ define([
                 if(countDown > 0) {
                     window.count = setInterval(function () {
                         countDown -= 1;
-                        self.element.find('span.countdown').text("(" + countDown + ")");
+                        $('.content-ajaxcart').find('span.countdown').text("(" + countDown + ")");
                         if (countDown <= 0) {
-                            self.element.find('span.countdown').parent().trigger("click");
+                            $('.modals-ajaxcart').find('.action-close').trigger('click');
                             clearInterval(window.count);
                         }
                     }, 1000);

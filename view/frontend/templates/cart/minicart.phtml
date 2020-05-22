@@ -1,13 +1,13 @@
 <div id="cart-page">
    <div id="block-cart-list" data-bind="scope:'minicart-addons'" class="block">
        <!-- ko template: getTemplate() --><!-- /ko -->
-       <?php
-       $maxpriceShipping = $this->helper('Magento\Framework\Pricing\Helper\Data')->currency($this->getConfigForShippingBar(),false,false);
-       $currencySymbols = $block->getStoreCurrency();
+    <?php
+    $maxpriceShipping = $block->getConfigForShippingBar();
+    $currencySymbols = $block->getStoreCurrency();
         $currencyCode = $block->getCurrentCurrencyCode();
         $freeShipping_status = $block->getFreeShippingStatus();
        ?>
-       <?php if($freeShipping_status == 1): ?>
+       <?php if($freeShipping_status == 1 && $maxpriceShipping != ''): ?>
        <div class="component-wrapper" data-bind="if: getTotalCartItems() > 0">
          <h4 data-bind="text : getpercentage() < 100 ?'Free shipping' : 'Eligible for free shipping!'"></h4>
          
@@ -22,7 +22,7 @@
            <div class="minprogress-active" id="child-progress" data-bind="style: { width: getpercentage() + '%' } "></div>
          </div>
        </div>
-     <?php endif; ?>
+
        <script>
            maxpriceShipping = <?= /* @escapeNotVerified */ $maxpriceShipping ?>;
        </script>
@@ -36,5 +36,6 @@
              }
          }
      </script>
+      <?php endif; ?>
    </div>
 </div>
