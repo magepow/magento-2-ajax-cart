@@ -34,21 +34,27 @@ $countDown = ($helper->getCountDownTime() > 0) ? $helper->getCountDownTime() : 0
             <strong><?php echo $block->escapeHtml(__('Shopping Cart')); ?></strong>
         </div>
         <p class="message">
-            <?php echo $block->escapeHtml(__('You added ')); ?>
-            <a href="<?php echo $block->escapeUrl($product->getProductUrl()); ?>"
-                title="<?php echo $block->escapeHtml($resultItem->getName()); ?>">
-                <?php echo $block->escapeHtml($resultItem->getName());?>
-            </a>
-            <?php echo $block->getRelatedAdded() ? $block->escapeHtml(__(' and related products')) : ''; ?>
-            <?php echo $block->escapeHtml(__(' to your shopping cart.')); ?>
+            <?php 
+            $link = '<a href="' . $block->escapeUrl($product->getProductUrl()) . '" title="' . $block->escapeHtml($resultItem->getName()) . '">' . $block->escapeHtml($resultItem->getName()) . '</a>';
+            if($block->getRelatedAdded()){
+                echo __(
+                    'You added %1 and related products to your shopping cart.',
+                    $link
+                );   
+            } else {
+                echo __(
+                    'You added %1 to your shopping cart.',
+                    $link
+                );                
+            }
+            ?>
         </p>
-
         <?php if ($helper->isShowProductImage()) :?>
             <div class="product-image">
                 <img src="<?php echo $block->escapeUrl(
                 $imageHelper->init(
                 $product,
-                'category_page_list',
+                'mini_cart_product_thumbnail',
                 ['height' => $helper->getImageHeight() , 'width'=> $helper->getImageWidth()]
                 )->getUrl()
                 ); ?>">
@@ -77,29 +83,17 @@ $countDown = ($helper->getCountDownTime() > 0) ? $helper->getCountDownTime() : 0
                     <span>
                         <?php
                         if ($cart->getItemsQty() > 1) {
-                            echo $block->escapeHtml(__('There are '));
+                            echo $block->escapeHtml(__('%1 items in your cart', $cart->getItemsQty()));
                         } else {
-                            echo $block->escapeHtml(__('There is '));
+                            echo $block->escapeHtml(__('1 item in your cart'));
                         }
                         ?>
-                        <a href="<?php echo $block->escapeUrl($block->getUrl('checkout/cart')); ?>">
-                            <?php
-                            echo $block->escapeHtml($cart->getItemsQty());
-                            if ($cart->getItemsQty() > 1) {
-                                echo $block->escapeHtml(__(' items'));
-                            } else {
-                                echo $block->escapeHtml(__(' item'));
-                            }
-                            ?>
-                        </a>
-                        <?php echo $block->escapeHtml(__(' in your cart.')); ?>
                     </span>
                 </div>
                 <div class="subtotal">
-                    <span>
-                        <?php
+                    <span class="label"><?php echo $block->escapeHtml(__('Cart Subtotal'));?></span>
+                    <?php
                         $quote = $block->getCartHelper()->getQuote();
-                        echo $block->escapeHtml(__('Cart Subtotal: '));
                         if(isset($currencySymbols))
                         {
                             echo $block->escapeHtml(__($currencySymbols));
@@ -107,8 +101,7 @@ $countDown = ($helper->getCountDownTime() > 0) ? $helper->getCountDownTime() : 0
                             echo $block->escapeHtml(__($currencyCode));
                         }
                         echo $block->escapeHtml(__($quote->getSubtotal()));
-                        ?>
-                    </span>
+                    ?>
                 </div>
             <?php endif; ?>
             <?php
@@ -121,36 +114,27 @@ $countDown = ($helper->getCountDownTime() > 0) ? $helper->getCountDownTime() : 0
                     false,
                     false
                 );
-                $needMore = $freeShipping - $total;
+
                 if($total < $freeShipping) {
-                    ?>
+                    $currency = isset($currencySymbols) ? $currencySymbols : $currencyCode;
+                    $needMore = $currency . ($freeShipping - $total);
+                ?>
                     <div class="freeShipping_message">
                         <?php
                         ?>
                         <div class="needMore">
                             <?php
-                            if(isset($currencySymbols))
-                            {
-                                echo $block->escapeHtml(__('Spend '.$currencySymbols));
-                            }else{
-                                echo $block->escapeHtml(__('Spend '.$currencyCode));
-                            }
-                            echo $block->escapeHtml(__($needMore.' more to get free shipping!'));
-                            echo '<br>';
+                                echo $block->escapeHtml(__('Spend %1 more to get free shipping!', $needMore));
                             ?>
                         </div>
                         <?php
                         echo $block->escapeHtml(__($freeShipping_message));
                         ?>
                     </div>
-                    <?php
+                <?php
                 }else{
                     ?>
-                    <div class="congratulation">
-                        <?php
-                        echo $block->escapeHtml(__($congratulation_message));
-                        ?>
-                    </div>
+                    <div class="congratulation"><?php echo $block->escapeHtml(__($congratulation_message)); ?></div>
                     <?php
                 }
             }
