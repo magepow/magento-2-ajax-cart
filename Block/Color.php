@@ -6,7 +6,7 @@
  * @author: MichaelHa
  * @create date: 2019-07-9 17:19:50
  * @LastEditors: DavidDuong
- * @LastEditTime: 2019-07-22 12:59:07
+ * @LastEditTime: 2020-06-29 12:59:07
  */
 namespace Magepow\Ajaxcart\Block;
  
@@ -23,10 +23,10 @@ class Color extends \Magento\Config\Block\System\Config\Form\Field {
 		$value = $element->getData('value');
 	
 		$html .= '<script type="text/javascript">
-			require(["jquery"], function ($) {
+			require(["jquery", "jquery/colorpicker/js/colorpicker"], function ($) {
 				$(document).ready(function (e) {
 					$("#'.$element->getHtmlId().'").css("background-color","#'.$value.'");
-					$("#'.$element->getHtmlId().'").colpick({
+					$("#'.$element->getHtmlId().'").ColorPicker({
 						layout:"hex",
 						submit:0,
 						colorScheme:"dark",
