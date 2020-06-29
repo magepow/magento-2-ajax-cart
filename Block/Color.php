@@ -25,19 +25,16 @@ class Color extends \Magento\Config\Block\System\Config\Form\Field {
 		$html .= '<script type="text/javascript">
 			require(["jquery", "jquery/colorpicker/js/colorpicker"], function ($) {
 				$(document).ready(function (e) {
-					$("#'.$element->getHtmlId().'").css("background-color","#'.$value.'");
-					$("#'.$element->getHtmlId().'").ColorPicker({
-						layout:"hex",
-						submit:0,
-						colorScheme:"dark",
-						color: "#'.$value.'",
-						onChange:function(hsb,hex,rgb,el,bySetColor) {
-						$(el).css("background-color","#"+hex);
-						if(!bySetColor) $(el).val(hex);
-					}
-					}).keyup(function(){
-						$(this).colpickSetColor(this.value);
-					});
+                   	var $el = $("#' . $element->getHtmlId() . '");
+                    $el.css("backgroundColor", "'. $value .'");
+
+                    // Attach the color picker
+                    $el.ColorPicker({
+                        color: "'. $value .'",
+                        onChange: function (hsb, hex, rgb) {
+                            $el.css("backgroundColor", "#" + hex).val("#" + hex);
+                        }
+                    });
 				});
 			});
 			</script>';
