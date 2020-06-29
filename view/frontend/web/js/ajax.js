@@ -33,7 +33,7 @@ define([
                     var data = '';
                     if (form) {
                         var isValid = true;
-                        if (options.isProductView) {
+                        if (options.isProductView || $('body').hasClass('open-quickview')) {
                             try {
                                 isValid = $(form).valid();
                             } catch(err) {
