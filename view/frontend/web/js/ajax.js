@@ -1,17 +1,28 @@
 define([
     'jquery',
+    'mage/translate',
     'Magento_Ui/js/modal/modal'
-    ], function ($, modal) {
+    ], function ($, $t, modal) {
         'use strict';
 
         $.widget('magepow.ajaxcart', {
             options: {
+                processStart: null,
+                processStop: null,
+                bindSubmit: true,
+                minicartSelector: '[data-block="minicart"]',
+                messagesSelector: '[data-placeholder="messages"]',
+                productStatusSelector: '.stock.available',
+                addToCartButtonSelector: '.action.tocart',
+                addToCartButtonDisabledClass: 'disabled',
+                addToCartButtonTextWhileAdding: '',
+                addToCartButtonTextAdded: '',
+                addToCartButtonTextDefault: '',
                 addUrl: '',
                 quickview: false,
                 isProductView: false,
                 isSuggestPopup: false,
-                quickViewUrl: '',
-                addToCartSelector: '.action.tocart'
+                quickViewUrl: ''
             },
 
             productIdInputName: ["product", "product-id", "data-product-id", "data-product"],
@@ -25,8 +36,8 @@ define([
                 var options = this.options;
                 var self = this;
 
-                self.element.find(options.addToCartSelector).off('click');
-                self.element.find(options.addToCartSelector).click(function (e) {
+                self.element.find(options.addToCartButtonSelector).off('click');
+                self.element.find(options.addToCartButtonSelector).click(function (e) {
                     e.preventDefault();
 
                     var form = $(this).parents('form').get(0);
@@ -57,11 +68,11 @@ define([
                                 }
 
                                 if (options.quickview) {
-                                    window.parent.ajaxCart._sendAjax(options.addUrl, data, oldAction);
+                                    window.parent.ajaxCart._sendAjax(options.addUrl, data, oldAction, form);
                                     return false;
                                 }
 
-                                self._sendAjax(options.addUrl, data, oldAction);
+                                self._sendAjax(options.addUrl, data, oldAction, form);
                                 return false;
                             }
 
@@ -141,10 +152,10 @@ define([
                 return false;
             },
 
-            _sendAjax: function (addUrl, data, oldAction) {
+            _sendAjax: function (addUrl, data, oldAction, form=false) {
                 var options = this.options;
                 var self = this;
-
+                if(form) self.disableAddToCartButton(form);
                 $.ajax({
                     type: 'post',
                     url: addUrl,
@@ -170,6 +181,7 @@ define([
                                 $('.modals-ajaxcart').remove();
                             }
                         }
+                        if(form) self.enableAddToCartButton(form);
                     },
                     error: function () {
                         window.location.href = oldAction;
@@ -215,9 +227,41 @@ define([
                         }
                     }, 1000);
                 }
+            },
+            /**
+             * @param {String} form
+             */
+            disableAddToCartButton: function (form) {
+                var addToCartButtonTextWhileAdding = this.options.addToCartButtonTextWhileAdding || $t('Adding...'),
+                    addToCartButton = $(form).find(this.options.addToCartButtonSelector);
+
+                addToCartButton.addClass(this.options.addToCartButtonDisabledClass);
+                addToCartButton.find('span').text(addToCartButtonTextWhileAdding);
+                addToCartButton.attr('title', addToCartButtonTextWhileAdding);
+            },
+
+            /**
+             * @param {String} form
+             */
+            enableAddToCartButton: function (form) {
+                var addToCartButtonTextAdded = this.options.addToCartButtonTextAdded || $t('Added'),
+                    self = this,
+                    addToCartButton = $(form).find(this.options.addToCartButtonSelector);
+
+                addToCartButton.find('span').text(addToCartButtonTextAdded);
+                addToCartButton.attr('title', addToCartButtonTextAdded);
+
+                setTimeout(function () {
+                    var addToCartButtonTextDefault = self.options.addToCartButtonTextDefault || $t('Add to Cart');
+
+                    addToCartButton.removeClass(self.options.addToCartButtonDisabledClass);
+                    addToCartButton.find('span').text(addToCartButtonTextDefault);
+                    addToCartButton.attr('title', addToCartButtonTextDefault);
+                }, 1000);
             }
+
         });
 
-$.fn.magiccart=$.magepow.ajaxcart;
-return $.magepow.ajaxcart;
+    $.fn.magiccart=$.magepow.ajaxcart;
+    return $.magepow.ajaxcart;
 });
