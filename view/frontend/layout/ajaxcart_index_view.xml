@@ -5,6 +5,9 @@
         <referenceBlock name="header.container" remove="true" />
         <referenceBlock name="page.top" remove="true" />
         <referenceBlock name="footer-container" remove="true" />
+        <referenceContainer name="sections.page.bottom" remove="true"/>
+        <referenceBlock name="breadcrumbs" remove="true"/>
+        <referenceBlock name="alothemes_header" remove="true"/>
         <referenceBlock name="copyright" remove="true" />
         <referenceBlock name="catalog.product.related" remove="true"/>
         <referenceBlock name="product.info.upsell" remove="true"/>
