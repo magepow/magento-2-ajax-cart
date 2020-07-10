@@ -34,13 +34,11 @@
                 </field>
                 <field id="product_image_width" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label><![CDATA[Image Width (px)]]></label>
-                    <backend_model>Magepow\Ajaxcart\Model\Config\Backend\Number\GreaterThanZero</backend_model>
-                    <validate>required-entry validate-greater-than-zero</validate>
+                    <validate>required-entry validate-digits validate-greater-than-zero</validate>
                 </field>
                 <field id="product_image_height" translate="label" type="text" sortOrder="16" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label><![CDATA[Image Height (px)]]></label>
-                    <backend_model>Magepow\Ajaxcart\Model\Config\Backend\Number\GreaterThanZero</backend_model>
-                    <validate>required-entry validate-greater-than-zero</validate>
+                    <validate>required-entry validate-digits validate-greater-than-zero</validate>
                 </field>
                 <field id="product_price" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label><![CDATA[Show Product Price]]></label>
@@ -55,9 +53,9 @@
                     <source_model>Magepow\Ajaxcart\Model\Config\Source\Countdown</source_model>
                 </field>
                 <field id="countdown_time" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                    <label><![CDATA[Countdown time: ...(s)]]></label>
-                    <backend_model>Magepow\Ajaxcart\Model\Config\Backend\Number\GreaterThanZero</backend_model>
-                    <validate>required-entry validate-greater-than-zero</validate>
+                    <label><![CDATA[Countdown]]></label>
+                    <comment><![CDATA[Countdown time to close popup.]]></comment>
+                    <validate>required-entry validate-digits validate-greater-than-zero</validate>
                 </field>
                 <field id="mini_cart" translate="label" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label><![CDATA[Show Cart Quantity and Cart Subtotal]]></label>
@@ -86,8 +84,7 @@
                 </field>
                 <field id="suggest_limit" translate="label" type="text" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label><![CDATA[Number of Suggested Products]]></label>
-                    <backend_model>Magepow\Ajaxcart\Model\Config\Backend\Number\GreaterThanZero</backend_model>
-                    <validate>required-entry validate-greater-than-zero</validate>
+                    <validate>required-entry validate-digits validate-greater-than-zero</validate>
                     <depends>
                         <field id="*/*/suggest_product">1</field>
                     </depends>
@@ -97,29 +94,29 @@
                 <label><![CDATA[Success Popup Design]]></label>
                 <field id="button_text_color" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label><![CDATA[Color of Text on Buttons]]></label>
-                    <frontend_model>Magepow\Ajaxcart\Block\Color</frontend_model>
+                    <frontend_model>Magepow\Ajaxcart\Block\System\Config\Form\Field\ColorPicker</frontend_model>
                 </field>
                 <field id="continue_text" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label><![CDATA[Text of 'Continue' Button]]></label>
                 </field>
                 <field id="continue" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label><![CDATA['Continue' Button Color]]></label>
-                    <frontend_model>Magepow\Ajaxcart\Block\Color</frontend_model>
+                    <frontend_model>Magepow\Ajaxcart\Block\System\Config\Form\Field\ColorPicker</frontend_model>
                 </field>
                 <field id="continue_hover" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label><![CDATA['Continue' Button Color on Hover]]></label>
-                    <frontend_model>Magepow\Ajaxcart\Block\Color</frontend_model>
+                    <frontend_model>Magepow\Ajaxcart\Block\System\Config\Form\Field\ColorPicker</frontend_model>
                 </field>
                 <field id="viewcart_text" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label><![CDATA[Text of 'View Cart' Button]]></label>
                 </field>
                 <field id="viewcart" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label><![CDATA['View Cart' Button Color]]></label>
-                    <frontend_model>Magepow\Ajaxcart\Block\Color</frontend_model>
+                    <frontend_model>Magepow\Ajaxcart\Block\System\Config\Form\Field\ColorPicker</frontend_model>
                 </field>
                 <field id="viewcart_hover" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label><![CDATA['View Cart' Button Color on Hover]]></label>
-                     <frontend_model>Magepow\Ajaxcart\Block\Color</frontend_model>
+                    <frontend_model>Magepow\Ajaxcart\Block\System\Config\Form\Field\ColorPicker</frontend_model>
                 </field>
                 <field id="freeShipping_message" translate="label" type="text" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label><![CDATA[Text of 'Free Shipping Message']]></label>
