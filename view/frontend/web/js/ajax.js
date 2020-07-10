@@ -174,8 +174,13 @@ define([
                             self._showPopup(_qsModal, _qsModalContent, data.popup);
                         } else if (data.error && data.view) {
                             /*show Quick View*/ 
-                            if(data.error_info.search("not available") == -1)
-                                $.fn.quickview({url:options.quickViewUrl  + 'id/' + data['id']});
+                            if(data.error_info.search("not available") == -1){
+                                if ($.fn.quickview) {
+                                    $.fn.quickview({url:options.quickViewUrl  + 'id/' + data['id']});
+                                } else {
+                                    self.quickview({url:options.quickViewUrl  + 'id/' + data['id']});
+                                }
+                            }
                         } else {
                             if($('.modals-ajaxcart')){
                                 $('.modals-ajaxcart').remove();
@@ -258,6 +263,53 @@ define([
                     addToCartButton.find('span').text(addToCartButtonTextDefault);
                     addToCartButton.attr('title', addToCartButtonTextDefault);
                 }, 1000);
+            },
+            
+            quickview: function () {
+                var obj = arguments[0];
+                var _qsModalContent = '<div class="content-quickview">quickview placeholder</div>';
+                if(!$('#modals_quickview').length){
+                    $(document.body).append('<div id="modals_quickview" style="display:none">' + _qsModalContent + '</div>');
+                }
+                var _qsModal = $('#modals_quickview .content-quickview');
+                var quickajax= function(url){
+                    if(_qsModal.length) $('#modals_quickview').html(_qsModalContent);
+                    // _qsModal.trigger('contentUpdated');
+                    $.ajax({
+                        url:url,
+                        type:'POST',
+                        showLoader: true,
+                        cache:false,   
+                        success:function(data){
+                            _qsModal.html(data);
+                            modal({
+                                type: 'popup',
+                                modalClass: 'modals-quickview',
+                                responsive: true, 
+                                buttons: false,
+                                closed: function(){
+                                    $('.modals-quickview').remove();
+                                }                           
+                            }, _qsModal);
+                            var body = $('body');
+                            _qsModal.modal('openModal');
+                            body.addClass('open-quickview');
+                            _qsModal.trigger('contentUpdated');
+                            _qsModal.on('modalclosed', function(){body.removeClass('open-quickview');});
+                        }
+                    });
+                    _qsModal.on('fotorama:load', function(){
+                        _qsModal.find(".product-view .product-info-main.product-shop").height(_qsModal.find(".product-img-box").height());
+                    });
+                }
+                if(obj.url){
+                    quickajax(obj.url)
+                } else {
+                    $(document).on('click', obj.itemClass, function(e) {
+                        e.preventDefault();
+                        quickajax($(this).data('url'))
+                    });
+                }
             }
 
         });
