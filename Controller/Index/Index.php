@@ -313,26 +313,22 @@ class Index extends \Magento\Framework\App\Action\Action
         if (!$this->cart->getQuote()->getHasError()) {
             $result = [];
 
-            $popupTemplate = 'Magepow_Ajaxcart::popup.phtml';
-
             $resultPage = $this->resultPageFactory->create();
             $popupBlock = $resultPage->getLayout()
-                ->createBlock(\Magepow\Ajaxcart\Block\Ajax\Template::class)
-                ->setTemplate($popupTemplate)
+                ->createBlock(\Magepow\Ajaxcart\Block\Ajax::class)
+                ->setTemplate('Magepow_Ajaxcart::popup.phtml')
                 ->setItem($resultItem)
                 ->setRelatedAdded($relatedAdded);
 
             if ($this->ajaxHelper->isShowSuggestBlock()) {
-                $suggestTemplate = 'Magepow_Ajaxcart::popup/suggest.phtml';
                 $suggestBlock = $resultPage->getLayout()
                     ->createBlock(\Magepow\Ajaxcart\Block\Popup\Suggest::class)
-                    ->setTemplate($suggestTemplate)
+                    ->setTemplate('Magepow_Ajaxcart::popup/suggest.phtml')
                     ->setProductId($resultItem->getProductId());
 
-                $popupAjaxTemplate = 'Magepow_Ajaxcart::popup/ajax.phtml';
                 $popupAjaxBlock = $resultPage->getLayout()
-                    ->createBlock(\Magepow\Ajaxcart\Block\Ajax\Template::class)
-                    ->setTemplate($popupAjaxTemplate);
+                    ->createBlock(\Magepow\Ajaxcart\Block\Ajax::class)
+                    ->setTemplate('Magepow_Ajaxcart::popup/ajax.phtml');
 
                 $suggestBlock->setChild('ajaxcart.popup.ajax.suggest', $popupAjaxBlock);
                 $popupBlock->setChild('ajaxcart.popup.suggest', $suggestBlock);

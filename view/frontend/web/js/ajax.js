@@ -30,6 +30,9 @@ define([
             _create: function () {
                 this._initAjaxcart();
                 window.ajaxCart = this;
+                $('body').on('contentUpdated', function () {
+                    window.ajaxCart._initAjaxcart();
+                });
             },
 
             _initAjaxcart: function () {
@@ -313,7 +316,5 @@ define([
             }
 
         });
-
-    $.fn.magiccart=$.magepow.ajaxcart;
     return $.magepow.ajaxcart;
 });

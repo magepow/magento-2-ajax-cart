@@ -2,8 +2,7 @@
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
   <body>
     <referenceContainer name="before.body.end">
-      <block class="Magepow\Ajaxcart\Block\Ajax\Template" ifconfig="magepow_ajaxcart/general/enabled" name="magepow.ajaxcart.config" template="Magepow_Ajaxcart::config.phtml"/>
-      <block class="Magepow\Ajaxcart\Block\Ajax\Template" ifconfig="magepow_ajaxcart/general/enabled" name="magepow.ajaxcart" template="Magepow_Ajaxcart::ajax.phtml"/>
+      <block class="Magepow\Ajaxcart\Block\Ajax" ifconfig="magepow_ajaxcart/general/enabled" name="magepow.ajaxcart.config" template="Magepow_Ajaxcart::config.phtml"/>
     </referenceContainer>
     <referenceContainer name="minicart.addons">
       <block class="Magepow\Ajaxcart\Block\Cart\Sidebar" name="shipping_bar" template="Magepow_Ajaxcart::cart/minicart.phtml">

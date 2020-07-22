@@ -6,19 +6,48 @@
  * @author: MichaelHa
  * @create date: 2019-06-14 17:19:50
  * @LastEditors: MichaelHa
- * @LastEditTime: 2019-06-29 12:47:26
+ * @LastEditTime: 2019-06-29 12:47:17
  */
-?>
-<?php
+
 $helper = $block->getAjaxHelper();
+$addUrl = $block->getUrl('ajaxcart');
+$quickview = 'false';
+$isProductView = 'false';
+
+if ($block->getRequest()->getModuleName() == 'ajaxcart') {
+    $quickview = 'true';
+    $isProductView = 'true';
+}
+
+if ($block->getRequest()->getFullActionName() == 'catalog_product_view') {
+    $isProductView = 'true';
+}
+
+$isEnable = $helper->isEnabled();
+
+if ($isProductView == 'true' && !$helper->isEnabledProductView()) {
+    $isEnable = false;
+}
+
+if ($block->getRequest()->getFullActionName() == 'checkout_cart_index'
+    || $block->getRequest()->getFullActionName() == 'wishlist_index_index'
+    || $block->getRequest()->getFullActionName() == 'checkout_cart_configure') {
+    $isEnable = false;
+}
+
+if (!$isEnable) return;
+
 $btnTextColor = $helper->getBtnTextColor();
 $btnContinueBackground = $helper->getBtnContinueBackground();
 $btnContinueHover = $helper->getBtnContinueHover();
 $btnViewcartBackground = $helper->getBtnViewcartBackground();
 $btnViewcartHover = $helper->getBtnViewcartHover();
 $countDown = ($helper->getCountDownTime() > 0) ? $helper->getCountDownTime() : 0;
+
 ?>
-<style>
+
+<div id="magepow_ajaxcart_popup"></div>
+<style type="text/css">
     #magepow_ajaxcart_popup .btn-continue .continue {
         background: #<?php echo $block->escapeHtml($btnContinueBackground); ?>;
         color: #<?php echo $block->escapeHtml($btnTextColor); ?>;
@@ -37,16 +66,17 @@ $countDown = ($helper->getCountDownTime() > 0) ? $helper->getCountDownTime() : 0
         background: #<?php echo $block->escapeHtml($btnViewcartHover); ?>;
     }
 </style>
-
-<script type="text/javascript">
-    require(['jquery', 'magepowAjaxcart', 'domReady!'], function($, magepowAjaxcart){
-            $('body').on('contentUpdated', function () {
-                if($.magiccart) $('body').magiccart({
-                    "addUrl": "<?php echo $block->escapeUrl($block->getUrl('ajaxcart')); ?>",
-                    "quickViewUrl": "<?php echo $block->escapeUrl($block->getUrl('ajaxcart/product/view/')); ?>",
-                    "addToCartSelector": "<?php echo $block->escapeJsQuote($helper->getAddToCartSelector()); ?>",
-                    "countDown": "<?php echo $countDown; ?>"
-                });
-            });
-    });
+<script type="text/x-magento-init">
+    {
+        "body": {
+            "magepowAjaxcart": {
+                "addUrl": "<?php echo $block->escapeUrl($addUrl); ?>",
+                "quickview": <?php echo $block->escapeJsQuote($quickview); ?>,
+                "isProductView": <?php echo $block->escapeJsQuote($isProductView); ?>,
+                "quickViewUrl": "<?php echo $block->escapeUrl($block->getUrl('ajaxcart/index/view/')); ?>",
+                "addToCartSelector": "<?php echo $block->escapeJsQuote($helper->getAddToCartSelector()); ?>",
+                "countDown": "<?php echo $countDown; ?>"
+            }
+        }
+    }
 </script>

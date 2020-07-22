@@ -8,9 +8,9 @@
  * @LastEditors: MichaelHa
  * @LastEditTime: 2019-06-29 12:44:29
  */
-namespace Magepow\Ajaxcart\Block\Ajax;
+namespace Magepow\Ajaxcart\Block;
 
-class Template extends \Magento\Framework\View\Element\Template
+class Ajax extends \Magento\Framework\View\Element\Template
 {
     /**
      * Ajax cart helper.
@@ -51,10 +51,6 @@ class Template extends \Magento\Framework\View\Element\Template
 
     protected $localeCurrency;
 
-
-
-
-
     /**
      * Initialize dependencies.
      *
@@ -87,13 +83,13 @@ class Template extends \Magento\Framework\View\Element\Template
         parent::__construct($context, []);
     }
 
-
     public function getFreeShippingStatus()
     {
         return $this->scopeConfig->getValue('carriers/freeshipping/active', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
     }
 
-    public function getStoreCurrency(){
+    public function getStoreCurrency()
+    {
         $currencycode = $this->_storeManager->getStore()->getCurrentCurrencyCode();
         return $this->localecurrency->getCurrency($currencycode)->getSymbol();
     }
@@ -105,8 +101,7 @@ class Template extends \Magento\Framework\View\Element\Template
     public function getCurrentCurrencyCode()
     {
         return $this->_storeManager->getStore()->getCurrentCurrencyCode();
-    }    
-
+    }
  
     /**
      * Get free shipping value.
