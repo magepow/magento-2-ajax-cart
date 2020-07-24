@@ -16,7 +16,7 @@
             	<enabled_countdown>1</enabled_countdown>
             	<countdown_time>5</countdown_time>
             	<mini_cart>1</mini_cart>
-            	<mini_checkout>1</mini_checkout>
+            	<mini_checkout>0</mini_checkout>
             	<suggest_product>0</suggest_product>
             	<suggest_source>0</suggest_source>
             	<suggest_limit>5</suggest_limit>
