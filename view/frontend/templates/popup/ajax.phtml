@@ -12,6 +12,7 @@
 <?php
 $helper = $block->getAjaxHelper();
 $addUrl = $block->getUrl('ajaxcart');
+$quickViewUrl = $helper->isModuleEnabled('Magiccart_Alothemes') ? $block->getUrl('alothemes/product/view/') : $block->getUrl('ajaxcart/index/view/');
 ?>
 <script type="text/x-magento-init">
     {
@@ -19,7 +20,7 @@ $addUrl = $block->getUrl('ajaxcart');
         "magepowAjaxcart": {
         "addUrl": "<?php echo $block->escapeUrl($addUrl); ?>",
         "isSuggestPopup": true,
-        "quickViewUrl": "<?php echo $block->escapeUrl($block->getUrl('ajaxcart/index/view')); ?>",
+        "quickViewUrl": "<?php echo $block->escapeUrl($quickViewUrl); ?>",
         "addToCartSelector": "<?php echo $block->escapeHtml($helper->getAddToCartSelector()); ?>"
     }
 }

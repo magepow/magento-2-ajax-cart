@@ -11,24 +11,29 @@ define([
             _create: function () {
                 var self = this;
                 var options = this.options;
-
-                $('.btn-continue').on('click', function() {
-                    $('.modals-ajaxcart').find('.action-close').trigger('click');   
-                    clearInterval(window.count);
-                });
-
                 var countDown = options.countDown;
 
                 if(countDown > 0) {
-                    window.count = setInterval(function () {
+                    window.ajaxcart_countdown = setInterval(function () {
                         countDown -= 1;
-                        $('.content-ajaxcart').find('span.countdown').text("(" + countDown + ")");
+                        $('.content-ajaxcart span.countdown').text("(" + countDown + ")");
                         if (countDown <= 0) {
-                            $('.modals-ajaxcart').find('.action-close').trigger('click');
-                            clearInterval(window.count);
+                            self._closePopup();
                         }
                     }, 1000);
                 }
+                
+                $('.content-ajaxcart .btn-continue').on('click', function() {
+                    self._closePopup();
+                });
+
+            },
+
+            _closePopup: function(){
+                // $('.modals-ajaxcart, .modals-overlay').remove();
+                // $('body').removeClass('_has-modal');
+                $('.modals-ajaxcart').find('.action-close').trigger('click');
+                clearInterval(window.ajaxcart_countdown);
             }
         });
 

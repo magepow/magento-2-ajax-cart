@@ -192,13 +192,3 @@ $countDown = ($helper->getCountDownTime() > 0) ? $helper->getCountDownTime() : 0
 <?php endif; ?>
 </div>
 </div>
-
-<script type="text/x-magento-init">
-    {
-        "#magepow_ajaxcart_popup": {
-        "magepowPopup": {
-        "countDown": <?php echo $block->escapeJsQuote($countDown); ?>
-    }
-}
-}
-</script>

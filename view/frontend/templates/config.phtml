@@ -43,6 +43,7 @@ $btnContinueHover = $helper->getBtnContinueHover();
 $btnViewcartBackground = $helper->getBtnViewcartBackground();
 $btnViewcartHover = $helper->getBtnViewcartHover();
 $countDown = ($helper->getCountDownTime() > 0) ? $helper->getCountDownTime() : 0;
+$quickViewUrl = $helper->isModuleEnabled('Magiccart_Alothemes') ? $block->getUrl('alothemes/product/view/') : $block->getUrl('ajaxcart/index/view/');
 
 ?>
 
@@ -73,7 +74,7 @@ $countDown = ($helper->getCountDownTime() > 0) ? $helper->getCountDownTime() : 0
                 "addUrl": "<?php echo $block->escapeUrl($addUrl); ?>",
                 "quickview": <?php echo $block->escapeJsQuote($quickview); ?>,
                 "isProductView": <?php echo $block->escapeJsQuote($isProductView); ?>,
-                "quickViewUrl": "<?php echo $block->escapeUrl($block->getUrl('ajaxcart/index/view/')); ?>",
+                "quickViewUrl": "<?php echo $block->escapeUrl($quickViewUrl); ?>",
                 "addToCartSelector": "<?php echo $block->escapeJsQuote($helper->getAddToCartSelector()); ?>",
                 "countDown": "<?php echo $countDown; ?>"
             }

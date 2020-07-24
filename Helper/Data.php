@@ -12,19 +12,45 @@ namespace Magepow\Ajaxcart\Helper;
 
 class Data extends \Magento\Framework\App\Helper\AbstractHelper
 {
+    /**
+     * @var \Magento\Framework\Module\Manager
+     */
+    protected $_moduleManager;
 
-     const PRICE_SHIPPING_BAR = 'carriers/freeshipping/free_shipping_subtotal';
-       /**
-        * Return if maximum price for shipping bar
-        * @return int
-        */
-       public function getPriceForShippingBar()
-       {
+    public function __construct(
+        \Magento\Framework\App\Helper\Context $context,
+        \Magento\Framework\Module\Manager $moduleManager
+    )
+    {
+        $this->_moduleManager = $moduleManager;
+        parent::__construct($context);
+    }
+
+    const PRICE_SHIPPING_BAR = 'carriers/freeshipping/free_shipping_subtotal';
+
+    /**
+     * Returns if module exists or not
+     *
+     * @return bool
+     * @throws \Magento\Framework\Exception\LocalizedException
+     */
+    public function isModuleEnabled($moduleName)
+    {
+      return $this->_moduleManager->isEnabled($moduleName);
+    }
+
+    /**
+    * Return if maximum price for shipping bar
+    * @return int
+    */
+    public function getPriceForShippingBar()
+    {
          return $this->scopeConfig->getValue(
              self::PRICE_SHIPPING_BAR,
              \Magento\Store\Model\ScopeInterface::SCOPE_STORE
          );
-     }
+    }
+
     /**
      * Is ajax cart enabled.
      *
