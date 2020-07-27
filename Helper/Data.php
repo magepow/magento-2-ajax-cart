@@ -12,6 +12,9 @@ namespace Magepow\Ajaxcart\Helper;
 
 class Data extends \Magento\Framework\App\Helper\AbstractHelper
 {
+
+    const PRICE_SHIPPING_BAR = 'carriers/freeshipping/free_shipping_subtotal';
+
     /**
      * @var \Magento\Framework\Module\Manager
      */
@@ -24,9 +27,33 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     {
         $this->_moduleManager = $moduleManager;
         parent::__construct($context);
+        $this->configModule = $this->getConfig(strtolower($this->_getModuleName()));
     }
 
-    const PRICE_SHIPPING_BAR = 'carriers/freeshipping/free_shipping_subtotal';
+    public function getConfig($cfg='')
+    {
+        if($cfg) return $this->scopeConfig->getValue( $cfg, \Magento\Store\Model\ScopeInterface::SCOPE_STORE );
+        return $this->scopeConfig;
+    }
+
+    public function getConfigModule($cfg='', $value=null)
+    {
+        $values = $this->configModule;
+        if( !$cfg ) return $values;
+        $config  = explode('/', $cfg);
+        $end     = count($config) - 1;
+        foreach ($config as $key => $vl) {
+            if( isset($values[$vl]) ){
+                if( $key == $end ) {
+                    $value = $values[$vl];
+                }else {
+                    $values = $values[$vl];
+                }
+            } 
+
+        }
+        return $value;
+    }
 
     /**
      * Returns if module exists or not

@@ -44,7 +44,7 @@ $btnViewcartBackground = $helper->getBtnViewcartBackground();
 $btnViewcartHover = $helper->getBtnViewcartHover();
 $countDown = ($helper->getCountDownTime() > 0) ? $helper->getCountDownTime() : 0;
 $quickViewUrl = $helper->isModuleEnabled('Magiccart_Alothemes') ? $block->getUrl('alothemes/product/view/') : $block->getUrl('ajaxcart/index/view/');
-
+$showLoader = $helper->getConfigModule('general/showLoader');
 ?>
 
 <div id="magepow_ajaxcart_popup"></div>
@@ -71,12 +71,13 @@ $quickViewUrl = $helper->isModuleEnabled('Magiccart_Alothemes') ? $block->getUrl
     {
         "body": {
             "magepowAjaxcart": {
+                "countDown": "<?php echo $countDown; ?>",
+                "showLoader": "<?php echo (bool) $showLoader; ?>",
                 "addUrl": "<?php echo $block->escapeUrl($addUrl); ?>",
                 "quickview": <?php echo $block->escapeJsQuote($quickview); ?>,
-                "isProductView": <?php echo $block->escapeJsQuote($isProductView); ?>,
                 "quickViewUrl": "<?php echo $block->escapeUrl($quickViewUrl); ?>",
-                "addToCartSelector": "<?php echo $block->escapeJsQuote($helper->getAddToCartSelector()); ?>",
-                "countDown": "<?php echo $countDown; ?>"
+                "isProductView": <?php echo $block->escapeJsQuote($isProductView); ?>,
+                "addToCartSelector": "<?php echo $block->escapeJsQuote($helper->getAddToCartSelector()); ?>"
             }
         }
     }

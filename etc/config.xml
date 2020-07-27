@@ -6,6 +6,7 @@
                 <enabled>1</enabled>
                 <enabled_product_view>1</enabled_product_view>
                 <selector>.action.tocart</selector>
+                <showLoader>1</showLoader>
             </general>
             <success_popup>
             	<product_image>1</product_image>

@@ -8,9 +8,10 @@ define([
         $.widget('magepow.ajaxcart', {
             options: {
                 processStart: null,
-                processStop: null,
-                bindSubmit: true,
-                countDown: 0,
+                processStop : null,
+                bindSubmit  : true,
+                countDown   : 0,
+                showLoader  : true,
                 minicartSelector: '[data-block="minicart"]',
                 messagesSelector: '[data-placeholder="messages"]',
                 productStatusSelector: '.stock.available',
@@ -31,7 +32,7 @@ define([
             _create: function () {
                 this._initAjaxcart();
                 window.ajaxCart = this;
-                $('body').on('contentUpdated', function () {
+                $('body').on('ajaxcart:refresh', function () {
                     window.ajaxCart._initAjaxcart();
                 });
             },
@@ -41,8 +42,7 @@ define([
                 var self = this;
 
                 self.element.find(options.addToCartButtonSelector).off('click');
-                self.element.find(options.addToCartButtonSelector).click(function (e) {
-                // self.element.on("click", options.addToCartButtonSelector, function(e){
+                self.element.on("click", options.addToCartButtonSelector, function(e){
                     e.preventDefault();
 
                     var form = $(this).parents('form').get(0);
@@ -165,7 +165,7 @@ define([
                     type: 'post',
                     url: addUrl,
                     data: data,
-                    showLoader: true,
+                    showLoader: options.showLoader,
                     dataType: 'json',
                     success: function (data) {
                         if (data.popup) {

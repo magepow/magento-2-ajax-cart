@@ -25,6 +25,10 @@
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                     <comment><![CDATA[Magento default: '.action.tocart'. Change selector of 'Add to Cart' button according to theme/site.]]></comment>
                 </field>
+                <field id="showLoader" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label><![CDATA[Show Loader]]></label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
             </group>
             <group id="success_popup" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label><![CDATA[Success Popup Setting]]></label>
