@@ -5,11 +5,11 @@
 ### ✓ Install Magepow Ajaxcart via composer (recommend)
 Run the following command in Magento 2 root folder:
 
-`composer require magepow/ajaxcart`
-
-`php bin/magento setup:upgrade`
-
-`php bin/magento setup:static-content:deploy -f`
+```
+composer require magepow/ajaxcart
+php bin/magento setup:upgrade
+php bin/magento setup:static-content:deploy -f
+```
 
 ## 2. Look in Frontend
 ![ajaxcontact_submit-img](https://github.com/magepow/magento2-ajaxcart/blob/master/media/ajaxcart_frontend.png)
