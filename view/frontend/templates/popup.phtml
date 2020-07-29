@@ -30,9 +30,7 @@ $countDown = ($helper->getCountDownTime() > 0) ? $helper->getCountDownTime() : 0
 ?>
 <div class="popup">
     <div class="block">
-        <div class="header">
-            <strong><?php echo $block->escapeHtml(__('Shopping Cart')); ?></strong>
-        </div>
+        <div class="header"><strong><?php echo $block->escapeHtml(__('Shopping Cart')); ?></strong></div>
         <p class="message">
             <?php 
             $link = '<a href="' . $block->escapeUrl($product->getProductUrl()) . '" title="' . $block->escapeHtml($resultItem->getName()) . '">' . $block->escapeHtml($resultItem->getName()) . '</a>';
@@ -49,33 +47,80 @@ $countDown = ($helper->getCountDownTime() > 0) ? $helper->getCountDownTime() : 0
             }
             ?>
         </p>
-        <?php if ($helper->isShowProductImage()) :?>
-            <div class="product-image">
-                <img src="<?php echo $block->escapeUrl(
-                $imageHelper->init(
-                $product,
-                'mini_cart_product_thumbnail',
-                ['height' => $helper->getImageHeight() , 'width'=> $helper->getImageWidth()]
-                )->getUrl()
-                ); ?>">
-                <?php if ($helper->isShowProductPrice() && $product->getTypeId() != \Magento\GroupedProduct\Model\Product\Type\Grouped::TYPE_CODE) :?>
-                <div>
-                    <span>
-                        <?php
-                        echo $block->escapeHtml(
-                            $block->getPricingHelper()->currency(
-                                $resultPrice,
-                                true,
-                                false
-                            )
-                        );
-                        ?>
-                    </span>
+        <div class="ajaxcart-wrapper-main">
+            <?php if ($helper->isShowProductImage()) :?>
+                <div class="product-image">
+                    <img src="<?php echo $block->escapeUrl(
+                    $imageHelper->init(
+                    $product,
+                    'mini_cart_product_thumbnail',
+                    ['height' => $helper->getImageHeight() , 'width'=> $helper->getImageWidth()]
+                    )->getUrl()
+                    ); ?>">
+                    <?php if ($helper->isShowProductPrice() && $product->getTypeId() != \Magento\GroupedProduct\Model\Product\Type\Grouped::TYPE_CODE) :?>
+                        <div>
+                            <span>
+                                <?php
+                                echo $block->escapeHtml(
+                                    $block->getPricingHelper()->currency(
+                                        $resultPrice,
+                                        true,
+                                        false
+                                    )
+                                );
+                                ?>
+                            </span>
+                        </div>
+                    <?php endif; ?>
                 </div>
             <?php endif; ?>
-        </div>
-    <?php endif; ?>
+            <div class="actions">
+                <?php if ($showCheckoutLink) : ?>
+                    <div class="checkout-link">
+                        <a href="<?php echo $block->escapeUrl($block->getUrl('checkout')); ?>">
+                            <span><?php echo $block->escapeHtml(__('Go to checkout')); ?></span>
+                        </a>
+                    </div>
+                <?php endif; ?>
+                <div class="btn-viewcart <?php echo (!$showContinue) ? 'full-width' : ''; ?>">
+                    <a
+                    href="<?php echo $block->escapeUrl($block->getUrl('checkout/cart')); ?>"
+                    title="<?php echo $block->escapeHtml(__($helper->getBtnViewcartText())); ?>"
+                    class="view-cart"
+                    >
+                        <button class="viewcart"
+                        type="button"
+                        title="<?php echo $block->escapeHtml(__($helper->getBtnViewcartText())); ?>">
+                            <span><?php echo $block->escapeHtml(__($helper->getBtnViewcartText())); ?></span>
+                            <?php if ($helper->getCountDownActive() == \Magepow\Ajaxcart\Model\Config\Source\Countdown::POPUP_COUNTDOWN_VIEW_CART_BTN
+                            && $helper->getCountDownTime() > 0) :?>
+                                <span class="<?php echo ($helper->getCountDownActive() == \Magepow\Ajaxcart\Model\Config\Source\Countdown::POPUP_COUNTDOWN_VIEW_CART_BTN) ? 'countdown' : ''; ?>">
+                                    (<?php echo $block->escapeHtml($helper->getCountDownTime()); ?>)
+                                </span>
+                            <?php endif; ?>
+                        </button>
+                    </a>
+                </div>
 
+            <?php if ($showContinue) : ?>
+                <div class="btn-continue">
+                    <button
+                    class="continue"
+                    type="button"
+                    title="<?php echo $block->escapeHtml(__($helper->getBtnContinueText())); ?>"
+                    >
+                        <span><?php echo $block->escapeHtml(__($helper->getBtnContinueText())); ?></span>
+                        <?php if ($helper->getCountDownActive() == \Magepow\Ajaxcart\Model\Config\Source\Countdown::POPUP_COUNTDOWN_CONTINUE_BTN
+                        && $helper->getCountDownTime() > 0) :?>
+                            <span class="<?php echo ($helper->getCountDownActive() == \Magepow\Ajaxcart\Model\Config\Source\Countdown::POPUP_COUNTDOWN_CONTINUE_BTN) ? 'countdown' : ''; ?>">
+                                (<?php echo $block->escapeHtml($helper->getCountDownTime()); ?>)
+                            </span>
+                        <?php endif; ?>
+                    </button>
+                </div>
+            <?php endif; ?>
+            </div>       
+        </div>
     <?php if ($showCartInfo || $showCheckoutLink) :?>
         <div class="cart-info">
             <?php if ($showCartInfo) : ?>
@@ -139,56 +184,9 @@ $countDown = ($helper->getCountDownTime() > 0) ? $helper->getCountDownTime() : 0
                 }
             }
             ?>
-            <?php if ($showCheckoutLink) : ?>
-                <div class="checkout-link">
-                    <a href="<?php echo $block->escapeUrl($block->getUrl('checkout')); ?>">
-                        <span><?php echo $block->escapeHtml(__('Go to checkout')); ?></span>
-                    </a>
-                </div>
-            <?php endif; ?>
+            
         </div>
     <?php endif; ?>
 </div>
-
 <?php echo $block->getChildHtml('ajaxcart.popup.suggest'); ?>
-
-<div class="action clearfix">
-    <div class="btn-viewcart <?php echo (!$showContinue) ? 'full-width' : ''; ?>">
-        <a
-        href="<?php echo $block->escapeUrl($block->getUrl('checkout/cart')); ?>"
-        title="<?php echo $block->escapeHtml(__($helper->getBtnViewcartText())); ?>"
-        class="view-cart"
-        >
-        <button class="viewcart"
-        type="button"
-        title="<?php echo $block->escapeHtml(__($helper->getBtnViewcartText())); ?>">
-        <span><?php echo $block->escapeHtml(__($helper->getBtnViewcartText())); ?></span>
-        <?php if ($helper->getCountDownActive() == \Magepow\Ajaxcart\Model\Config\Source\Countdown::POPUP_COUNTDOWN_VIEW_CART_BTN
-        && $helper->getCountDownTime() > 0) :?>
-        <span class="<?php echo ($helper->getCountDownActive() == \Magepow\Ajaxcart\Model\Config\Source\Countdown::POPUP_COUNTDOWN_VIEW_CART_BTN) ? 'countdown' : ''; ?>">
-            (<?php echo $block->escapeHtml($helper->getCountDownTime()); ?>)
-        </span>
-    <?php endif; ?>
-</button>
-</a>
-</div>
-
-<?php if ($showContinue) : ?>
-    <div class="btn-continue">
-        <button
-        class="continue"
-        type="button"
-        title="<?php echo $block->escapeHtml(__($helper->getBtnContinueText())); ?>"
-        >
-        <span><?php echo $block->escapeHtml(__($helper->getBtnContinueText())); ?></span>
-        <?php if ($helper->getCountDownActive() == \Magepow\Ajaxcart\Model\Config\Source\Countdown::POPUP_COUNTDOWN_CONTINUE_BTN
-        && $helper->getCountDownTime() > 0) :?>
-        <span class="<?php echo ($helper->getCountDownActive() == \Magepow\Ajaxcart\Model\Config\Source\Countdown::POPUP_COUNTDOWN_CONTINUE_BTN) ? 'countdown' : ''; ?>">
-            (<?php echo $block->escapeHtml($helper->getCountDownTime()); ?>)
-        </span>
-    <?php endif; ?>
-</button>
-</div>
-<?php endif; ?>
-</div>
 </div>
