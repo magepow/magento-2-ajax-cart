@@ -27,6 +27,13 @@ Quick View Popup Setting: Allow you can show/ disable 'Go to Product' link/butto
 - General Add To Cart Bottom
 Allow you can Enable/Disable General Add To Cart Bottom and Height Scroll (The height of screen from the top of the web page to the appearance 'add to cart bottom').
 
+## Donation
+
+If this project help you reduce time to develop, you can give me a cup of coffee :) 
+
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/paypalme/alopay)
+
+
 **Free Extensions List**
 
 * [Magento 2 Recent Sales Notification](https://magepow.com/magento-2-recent-sales-notification.html)
