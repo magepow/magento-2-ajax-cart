@@ -1,5 +1,6 @@
 & when (@media-common = true) {
 	/* Ajax cart */
+    @ajaxcart__button__min-width: '150px';
     .modal-popup.modal-slide.modals-ajaxcart {
         .action-close {
             top: -10px;
@@ -212,15 +213,15 @@
         	}
         	.btn-viewcart {
         		text-decoration: none;
-        		min-width: 150px;
+        		min-width: @ajaxcart__button__min-width;
     			margin-right: 10px;
         	}
         	.checkout-link {
         		margin-right: 15px;
-        		min-width: 150px;
+        		min-width: @ajaxcart__button__min-width;
         	}
         	.btn-continue {
-        		min-width: 150px;
+        		min-width: @ajaxcart__button__min-width;
         	}
         	.full-width {
         		width: auto !important;
