@@ -60,6 +60,7 @@
                     <label><![CDATA[Countdown]]></label>
                     <comment><![CDATA[Countdown time to close popup.]]></comment>
                     <validate>required-entry validate-digits validate-greater-than-zero</validate>
+                    <depends><field id="*/*/enabled_countdown" separator=",">1,2</field></depends>
                 </field>
                 <field id="mini_cart" translate="label" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label><![CDATA[Show Cart Quantity and Cart Subtotal]]></label>
