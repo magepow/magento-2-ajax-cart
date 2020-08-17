@@ -254,7 +254,7 @@ class Index extends \Magento\Framework\App\Action\Action
             $result['view'] = true;
             // $qty = isset($params['qty']) ? $params['qty'] : 1;
             // $stockQty = $product->getExtensionAttributes()->getStockItem()->getQty();
-            if( ($product->getTypeId() == 'simple' && !$product->getData('has_options')) || isset($_POST['related_product'])){
+            if( ($product->getTypeId() == 'simple' && !$product->getData('has_options')) || $this->getRequest()->getPost('related_product') ) {
                 $result['view'] = false;
             }
             $resultJson = $this->resultFactory->create(ResultFactory::TYPE_JSON);

@@ -128,7 +128,6 @@ class View extends \Magento\Catalog\Controller\Product\View
                 // Load default page handles and page configurations
                 if ($params && $params->getBeforeHandles()) {
                     foreach ($params->getBeforeHandles() as $handle) {
-                        echo $handle;die;
                         $page->addPageLayoutHandles(
                             ['id' => $product->getId(), 'sku' => $urlSafeSku, 'type' => $product->getTypeId()],
                             $handle
