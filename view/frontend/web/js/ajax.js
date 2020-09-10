@@ -41,8 +41,7 @@ define([
                 var options = this.options;
                 var self = this;
 
-                self.element.find(options.addToCartButtonSelector).off('click');
-                self.element.on("click", options.addToCartButtonSelector, function(e){
+                self.element.off('click').on("click", options.addToCartButtonSelector, function(e){
                     e.preventDefault();
 
                     var form = $(this).parents('form').get(0);
