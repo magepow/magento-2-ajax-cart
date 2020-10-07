@@ -167,23 +167,29 @@ define([
                     showLoader: options.showLoader,
                     dataType: 'json',
                     success: function (data) {
+                        var _qsModalContent = '<div class="content-ajaxcart">quickview placeholder</div>';
+                        if(!$('#modals_ajaxcart').length){
+                            $(document.body).append('<div id="modals_ajaxcart" style="display:none">' + _qsModalContent + '</div>');
+                        }
+
+                        var _qsModal = $('#modals_ajaxcart .content-ajaxcart');
                         if (data.popup) {
-                            var _qsModalContent = '<div class="content-ajaxcart">quickview placeholder</div>';
-                            if(!$('#modals_ajaxcart').length){
-                                $(document.body).append('<div id="modals_ajaxcart" style="display:none">' + _qsModalContent + '</div>');
-                            }
-
-                            var _qsModal = $('#modals_ajaxcart .content-ajaxcart');
-
                             self._showPopup(_qsModal, _qsModalContent, data.popup);
                         } else if (data.error && data.view) {
-                            /*show Quick View*/ 
-                            if(data.error_info.search("not available") == -1){
+                            /*show Quick View*/
+                            var quickView = true;
+                            if(form){
+                                var addToCartButtonMain = $(form).closest('#product_addtocart_form');
+                                if(addToCartButtonMain.length) quickView = false;
+                            }
+                            if(quickView && data.error_info.search("not available") == -1){
                                 if ($.fn.quickview) {
                                     $.fn.quickview({url:options.quickViewUrl  + 'id/' + data['id']});
                                 } else {
                                     self.quickview({url:options.quickViewUrl  + 'id/' + data['id']});
                                 }
+                            } else {
+                                self._showPopup(_qsModal, _qsModalContent, data.error_info);
                             }
                         } else {
                             if($('.modals-ajaxcart')){
