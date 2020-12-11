@@ -5,10 +5,10 @@
 Ajax (short for Asynchronous JavaScript and XML) is a technique that allows customers to change any part of the website without reloading the page. In the process of researching customer behavior on e-commerce websites, Magepow integrated Ajax into the 'Add to cart' button to reduce the time to navigate the page, thereby optimizing the customer shopping process. When a customer clicks on the 'Add to cart' button, instead of navigating to the check out page, an Ajax popup will appear with information about the image, name, product price, the number of products in the shopping cart. , total order payment. Customers can continue to shop or redirect to the checkout page.
 
 
-Easy to configure and customize. Centralized administration panel for easy setup and management. Use Magepow_Ajaxcart's built-in features to professionalize your website.
+Easy to configure and customize. Centralized administration panel for easy setup and management. Use Magento_Ajax_add_to_cart_Free's built-in features to professionalize your website.
 
 ## Highlight Features 
-1: Enable/Disable the extension from the admin panel
+1: Enable/Disable Ajaxcart extension from the admin panel
 
 2: Choose to show / not show the page load icon
 
