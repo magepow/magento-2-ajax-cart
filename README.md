@@ -5,7 +5,7 @@
 Ajax (short for Asynchronous JavaScript and XML) is a technique that allows customers to change any part of the website without reloading the page. In the process of researching customer behavior on e-commerce websites, Magepow integrated Ajax into the 'Add to cart' button to reduce the time to navigate the page, thereby optimizing the customer shopping process. When a customer clicks on the 'Add to cart' button, instead of navigating to the check out page, an Ajax popup will appear with information about the image, name, product price, the number of products in the shopping cart. , total order payment. Customers can continue to shop or redirect to the checkout page.
 
 
-Easy to configure and customize. Centralized administration panel for easy setup and management. Use Magepow Ajaxcart's built-in features to professionalize your website.
+Easy to configure and customize. Centralized administration panel for easy setup and management. Use Magepow_Ajaxcart's built-in features to professionalize your website.
 
 ## Highlight Features 
 1: Enable/Disable the extension from the admin panel
@@ -37,7 +37,7 @@ Easy to configure and customize. Centralized administration panel for easy setup
  
 
 ## 1. How to install Magento 2 Ajaxcart Free
-### ✓ Install Magepow Ajaxcart via composer (recommend)
+### ✓ Install Ajax add to cart for Magento 2 via composer (recommend)
 Run the following command in Magento 2 root folder:
 
 ```
@@ -49,7 +49,7 @@ php bin/magento setup:static-content:deploy -f
 ## 2. Look in Frontend
 ![ajaxcontact_submit-img](https://github.com/magepow/magento2-ajaxcart/blob/master/media/ajaxcart_frontend.png)
 
-## 3. Magepow Ajaxcart user guide
+## 3. Magento 2 Ajaxcart extension user guide
 [Document](https://docs.alothemes.com/m2/theme/gecko/#sub72)
 
 To Config and Manage Ajax Cart, go to *Admin Panel > Magiccart > ALO themes > Configuration > MAGEPOW > Ajax Cart as the image below*
