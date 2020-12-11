@@ -1,5 +1,40 @@
-# Magento2 Ajaxcart
-**Ajax Cart extension** for Magento 2 allows customers Add products to cart easily and quickly without reloading the page. Therefore, the extension not only enhances customer shopping experience but also reduce the bounce rate or leaving the cart.
+# Magento 2 Ajax add to cart extension Free
+## General information
+**Magento 2 Ajax add to cart Free by Magepow** is a module that allows customers to add products to their shopping cart on the homepage, category page, product page, CMS, or any page on the website through the Ajax pop-up window.
+
+Ajax (short for Asynchronous JavaScript and XML) is a technique that allows customers to change any part of the website without reloading the page. In the process of researching customer behavior on e-commerce websites, Magepow integrated Ajax into the 'Add to cart' button to reduce the time to navigate the page, thereby optimizing the customer shopping process. When a customer clicks on the 'Add to cart' button, instead of navigating to the check out page, an Ajax popup will appear with information about the image, name, product price, the number of products in the shopping cart. , total order payment. Customers can continue to shop or redirect to the checkout page.
+
+
+Easy to configure and customize. Centralized administration panel for easy setup and management. Use Magepow Ajaxcart's built-in features to professionalize your website.
+
+## Highlight Features 
+1: Enable/Disable the extension from the admin panel
+
+2: Choose to show / not show the page load icon
+
+3: Success Popup Setting
+
+- Select display/display, product image height, width
+
+- Choose to show not show Product Price, 'Continue' Button, Countdown time for Button
+
+- Choose to show/not to show Cart Quantity and Cart Subtotal, 'Go to Checkout' link and Suggested Products
+
+4: Success Popup Design
+
+- Customize the color of text on buttons
+
+- Customize the text of “Continue” button, 'Continue' Button Color, 'Continue' Button Color on Hover
+
+- Customize the Text of 'View Cart' Button, 'View Cart' Button Color, 'View Cart' Button Color on Hover.
+
+- Customize Text of 'Free Shipping Message', Text of 'Congratulation Message'
+5: Quick View Popup Setting
+
+- Choose to show/not show the 'Go to Product' link
+
+- Choose to show/not show Additional Data
+ 
 
 ## 1. How to install Magento 2 Ajaxcart
 ### ✓ Install Magepow Ajaxcart via composer (recommend)
