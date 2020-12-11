@@ -35,6 +35,9 @@ Easy to configure and customize. Centralized administration panel for easy setup
 
 - Choose to show/not show Additional Data
  
+## [How does Magepow Ajax cart work?](https://www.youtube.com/watch?v=KVg1uew0hfU&t=15s)
+
+
 
 ## 1. How to install Magento 2 Ajaxcart Free
 ### ✓ Install Ajax add to cart for Magento 2 via composer (recommend)
