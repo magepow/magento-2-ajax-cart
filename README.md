@@ -1,6 +1,6 @@
 # Magento 2 Ajax add to cart extension Free
 ## General information
-**Magento 2 Ajax add to cart Free by Magepow** is a module that allows customers to add products to their shopping cart on the homepage, category page, product page, CMS, or any page on the website through the Ajax pop-up window.
+**[Magento 2 Ajax add to cart extension by Magepow](https://magepow.com/magepow/magento-2-ajax-add-to-cart.html)** is a module that allows customers to add products to their shopping cart on the homepage, category page, product page, CMS, or any page on the website through the Ajax pop-up window.
 
 Ajax (short for Asynchronous JavaScript and XML) is a technique that allows customers to change any part of the website without reloading the page. In the process of researching customer behavior on e-commerce websites, Magepow integrated Ajax into the 'Add to cart' button to reduce the time to navigate the page, thereby optimizing the customer shopping process. When a customer clicks on the 'Add to cart' button, instead of navigating to the check out page, an Ajax popup will appear with information about the image, name, product price, the number of products in the shopping cart. , total order payment. Customers can continue to shop or redirect to the checkout page.
 
