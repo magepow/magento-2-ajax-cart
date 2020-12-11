@@ -36,7 +36,7 @@ Easy to configure and customize. Centralized administration panel for easy setup
 - Choose to show/not show Additional Data
  
 
-## 1. How to install Magento 2 Ajaxcart
+## 1. How to install Magento 2 Ajaxcart Free
 ### ✓ Install Magepow Ajaxcart via composer (recommend)
 Run the following command in Magento 2 root folder:
 
