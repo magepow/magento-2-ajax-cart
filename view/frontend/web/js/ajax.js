@@ -16,6 +16,7 @@ define([
                 messagesSelector: '[data-placeholder="messages"]',
                 productStatusSelector: '.stock.available',
                 addToCartButtonSelector: '.action.tocart',
+                addAllToCartButtonSelector: '.add-all-tocart',
                 addToCartButtonDisabledClass: 'disabled',
                 addToCartButtonTextWhileAdding: '',
                 addToCartButtonTextAdded: '',
@@ -41,6 +42,7 @@ define([
                 var options = this.options;
                 var self = this;
 
+                self.addAllToCart();
                 self.element.off('click').on("click", options.addToCartButtonSelector, function(e){
                     e.preventDefault();
 
@@ -328,6 +330,37 @@ define([
                         quickajax($(this).data('url'))
                     });
                 }
+            }, 
+            addAllToCart: function() {
+                var self = this;
+                var options = this.options;
+                $(document).on("click", options.addAllToCartButtonSelector, function(e){
+                    var searchIds = $("input[name='product']").map(function(){return $(this).val();}).get();
+                    $.ajax({
+                        url: options.addUrl + 'index/allcart',
+                        type: 'POST',
+                        showLoader: true,
+                        cache: false,
+                        dataType: 'json',
+                        data: {productIds : searchIds.join()},
+                        success: function (data) {
+                            var _qsModalContent = '<div class="content-ajaxcart">quickview placeholder</div>';
+                            if(!$('#modals_ajaxcart').length){
+                                $(document.body).append('<div id="modals_ajaxcart" style="display:none">' + _qsModalContent + '</div>');
+                            }
+
+                            var _qsModal = $('#modals_ajaxcart .content-ajaxcart');
+                            if (data.error) {
+                                window.location.replace(options.addUrl +'#scroll');
+                            }else{
+                                if (data.popup) {
+                                    self._showPopup(_qsModal, _qsModalContent, data.popup);
+                                }
+                            }
+                            
+                        }
+                    });
+                })                
             }
 
         });

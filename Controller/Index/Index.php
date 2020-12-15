@@ -28,14 +28,14 @@ class Index extends \Magento\Framework\App\Action\Action
      *
      * @var CustomerCart
      */
-    private $cart;
+    protected $cart;
 
     /**
      * Result page factory.
      *
      * @var PageFactory
      */
-    private $resultPageFactory;
+    protected $resultPageFactory;
 
     /**
      * Resolver.
@@ -84,7 +84,7 @@ class Index extends \Magento\Framework\App\Action\Action
      *
      * @var \Magepow\Ajaxcart\Helper\Data
      */
-    private $ajaxHelper;
+    protected $ajaxHelper;
 
     /**
      * Localized to normalized.
