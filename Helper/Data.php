@@ -16,6 +16,11 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper
     const PRICE_SHIPPING_BAR = 'carriers/freeshipping/free_shipping_subtotal';
 
     /**
+     * @var array
+     */
+    protected $configModule;
+
+    /**
      * @var \Magento\Framework\Module\Manager
      */
     protected $_moduleManager;
