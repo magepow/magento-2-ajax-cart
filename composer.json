@@ -1,8 +1,8 @@
 {
     "name": "magepow/ajaxcart",
     "description": "Magepow Ajax Add To Cart",
-    "suggest": {
-        "magento/module-cookie": "100.1.*"
+    "require": {
+        "magepow/core": "^1.0.0"
     },
     "type": "magento2-module",
     "license": [
