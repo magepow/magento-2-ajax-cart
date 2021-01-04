@@ -1,13 +1,17 @@
-# Magento 2 Ajax add to cart extension Free
-## General information
+## Magento 2 Ajax add to cart extension Free
+
 **[Magento 2 Ajax add to cart extension by Magepow](https://magepow.com/magepow/magento-2-ajax-add-to-cart.html)** is a module that allows customers to add products to their shopping cart on the homepage, category page, product page, CMS, or any page on the website through the Ajax pop-up window.
 
-Ajax (short for Asynchronous JavaScript and XML) is a technique that allows customers to change any part of the website without reloading the page. In the process of researching customer behavior on e-commerce websites, Magepow integrated Ajax into the 'Add to cart' button to reduce the time to navigate the page, thereby optimizing the customer shopping process. When a customer clicks on the 'Add to cart' button, instead of navigating to the check out page, an Ajax popup will appear with information about the image, name, product price, the number of products in the shopping cart. , total order payment. Customers can continue to shop or redirect to the checkout page.
+### Benefits
+Ajax (short for Asynchronous JavaScript and XML) is a technique that allows customers to change any part of the website without reloading the page. 
 
+In the process of researching customer behavior on e-commerce websites, Magepow integrated Ajax into the 'Add to cart' button to reduce the time to navigate the page, thereby optimizing the customer shopping process. When a customer clicks on the 'Add to cart' button, instead of navigating to the check out page, an Ajax popup will appear with information about the image, name, product price, the number of products in the shopping cart. , total order payment. 
+
+Customers can continue to shop or redirect to the checkout page.
 
 Easy to configure and customize. Centralized administration panel for easy setup and management. Use Magento_Ajax_add_to_cart_Free's built-in features to professionalize your website.
 
-## Highlight Features 
+### Highlight Features 
 1: Enable/Disable Ajaxcart extension from the admin panel
 
 2: Choose to show / not show the page load icon
@@ -35,8 +39,7 @@ Easy to configure and customize. Centralized administration panel for easy setup
 
 - Choose to show/not show Additional Data
  
-## [How does Magepow Ajax cart work?](https://www.youtube.com/watch?v=KVg1uew0hfU&t=15s)
-
+### [How does Magepow Ajax cart work?](https://www.youtube.com/watch?v=KVg1uew0hfU&t=15s)
 
 
 ## 1. How to install Magento 2 Ajaxcart Free
