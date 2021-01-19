@@ -1,6 +1,10 @@
 & when (@media-common = true) {
 	/* Ajax cart */
     @ajaxcart__button__min-width: '150px';
+    /* Click outside close modal */
+    .modal-popup {
+         pointer-events: none;
+    }
     .modal-popup.modals-ajaxcart {
         .action-close {
             top: -10px;
