@@ -161,13 +161,19 @@ define([
             _sendAjax: function (addUrl, data, oldAction, form=false) {
                 var options = this.options;
                 var self = this;
-                if(form) self.disableAddToCartButton(form);
+                if(form){
+                    self.disableAddToCartButton(form);
+                    data = new FormData(form);
+                }
                 $.ajax({
                     type: 'post',
                     url: addUrl,
                     data: data,
                     showLoader: options.showLoader,
                     dataType: 'json',
+                    cache: false,
+                    contentType: false,
+                    processData: false,
                     success: function (data) {
                         var _qsModalContent = '<div class="content-ajaxcart">quickview placeholder</div>';
                         if(!$('#modals_ajaxcart').length){
