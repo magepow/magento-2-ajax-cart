@@ -178,6 +178,17 @@ class Index extends \Magento\Framework\App\Action\Action
         return $resultRedirect;
     }
 
+    public function getProductId()
+    {
+        $productId = (int)$this->getRequest()->getParam('product');
+
+        if (!$productId) {
+            $productId = (int)$this->getRequest()->getParam('id');
+        }
+
+        return $productId;
+    }
+
     /**
      * Execute add to cart.
      *
@@ -245,11 +256,12 @@ class Index extends \Magento\Framework\App\Action\Action
             );
 
             $result = [];
+            $productId = $this->getProductId();
             $result['error'] = true;
             $result['error_info'] = $e->getMessage();
-            $result['id'] = $params['id'];
+            $result['id'] = $productId;
             $result['url'] = $this->escaper->escapeUrl(
-                $this->urlInterface->getUrl('ajaxcart/index/view', ['id' => $params['id']])
+                $this->urlInterface->getUrl('ajaxcart/index/view', ['id' => $productId])
             );
             $result['view'] = true;
             // $qty = isset($params['qty']) ? $params['qty'] : 1;
@@ -283,11 +295,7 @@ class Index extends \Magento\Framework\App\Action\Action
      */
     private function initProduct()
     {
-        $productId = (int)$this->getRequest()->getParam('product');
-
-        if (!$productId) {
-            $productId = (int)$this->getRequest()->getParam('id');
-        }
+        $productId = $this->getProductId();
 
         if ($productId) {
             $storeId = $this->storeManager->getStore()->getId();
