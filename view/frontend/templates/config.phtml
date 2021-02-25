@@ -31,6 +31,7 @@ if ($isProductView == 'true' && !$helper->isEnabledProductView()) {
 
 if ($block->getRequest()->getFullActionName() == 'checkout_cart_index'
     || $block->getRequest()->getFullActionName() == 'wishlist_index_index'
+    || $block->getRequest()->getFullActionName() == 'catalog_product_compare_index'
     || $block->getRequest()->getFullActionName() == 'checkout_cart_configure') {
     $isEnable = false;
 }
@@ -38,7 +39,9 @@ if ($block->getRequest()->getFullActionName() == 'checkout_cart_index'
 if (!$isEnable) return;
 
 $btnTextColor = $helper->getBtnTextColor();
+
 $btnContinueBackground = $helper->getBtnContinueBackground();
+
 $btnContinueHover = $helper->getBtnContinueHover();
 $btnViewcartBackground = $helper->getBtnViewcartBackground();
 $btnViewcartHover = $helper->getBtnViewcartHover();
@@ -49,24 +52,25 @@ $showLoader = $helper->getConfigModule('general/showLoader');
 
 <div id="magepow_ajaxcart_popup"></div>
 <style type="text/css">
-    #magepow_ajaxcart_popup .btn-continue .continue {
-        background: #<?php echo $block->escapeHtml($btnContinueBackground); ?>;
-        color: #<?php echo $block->escapeHtml($btnTextColor); ?>;
+    .ajaxcart-wrapper-main .btn-continue .continue {
+        background: <?php echo $block->escapeHtml($btnContinueBackground); ?>;
+        color: <?php echo $block->escapeHtml($btnTextColor); ?>;
     }
 
-    #magepow_ajaxcart_popup .btn-continue .continue:hover {
-        background: #<?php echo $block->escapeHtml($btnContinueHover); ?>;
+    .ajaxcart-wrapper-main .btn-continue .continue:hover {
+        background: <?php echo $block->escapeHtml($btnContinueHover); ?>;
     }
 
-    #magepow_ajaxcart_popup .btn-viewcart .viewcart {
-        background: #<?php echo $block->escapeHtml($btnViewcartBackground); ?>;
-        color: #<?php echo $block->escapeHtml($btnTextColor); ?>;
+    .ajaxcart-wrapper-main .btn-viewcart .viewcart {
+        background: <?php echo $block->escapeHtml($btnViewcartBackground); ?>;
+        color: <?php echo $block->escapeHtml($btnTextColor); ?>;
     }
 
-    #magepow_ajaxcart_popup .btn-viewcart .viewcart:hover {
-        background: #<?php echo $block->escapeHtml($btnViewcartHover); ?>;
+    .ajaxcart-wrapper-main .btn-viewcart .viewcart:hover {
+        background: <?php echo $block->escapeHtml($btnViewcartHover); ?>;
     }
 </style>
+
 <script type="text/x-magento-init">
     {
         "body": {
