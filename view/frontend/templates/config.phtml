@@ -32,7 +32,6 @@ if ($isProductView == 'true' && !$helper->isEnabledProductView()) {
 if ($block->getRequest()->getFullActionName() == 'checkout_cart_index'
     || $block->getRequest()->getFullActionName() == 'wishlist_index_index'
     || $block->getRequest()->getFullActionName() == 'customer_account_index'
-    || $block->getRequest()->getFullActionName() == 'catalog_category_view'
     || $block->getRequest()->getFullActionName() == 'catalog_product_compare_index'
     || $block->getRequest()->getFullActionName() == 'checkout_cart_configure') {
     $isEnable = false;

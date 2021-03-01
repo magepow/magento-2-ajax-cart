@@ -44,8 +44,9 @@ define([
 
                 self.addAllToCart();
                 self.element.off('click').on("click", options.addToCartButtonSelector, function(e){
+                    if($(this).attr('data-post')) return;// turn off add to cart for wishlist in category page, recently ordered in category page
                     e.preventDefault();
-
+     
                     var form = $(this).parents('form').get(0);
                     var data = '';
                     if (form) {
