@@ -46,7 +46,7 @@ define([
                 self.element.off('click').on("click", options.addToCartButtonSelector, function(e){
                     if($(this).attr('data-post')) return;// turn off add to cart for wishlist in category page
                     var form = $(this).parents('form').get(0);
-                    if($(this).attr('data-post')) return;// turn off the recently ordered sidebar in category page
+                    if($(form).hasClass('reorder')) return;// turn off the recently ordered sidebar in category page
                     e.preventDefault();
      
                     var form = $(this).parents('form').get(0);
