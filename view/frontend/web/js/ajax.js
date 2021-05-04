@@ -106,7 +106,10 @@ define([
                     }
                 });
             },
+            _initializeOptions: function () {
 
+            priceBoxOptions = $(this.options.priceHolderSelector).priceBox().priceBox(‘option’, ‘openOnFocus’, true).priceConfig || null;
+        },
             _findId: function (btn, oldAction, form) {
                 var self = this;
                 var id = $(btn).attr('data-product-id');
