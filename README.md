@@ -97,7 +97,7 @@ If this project help you reduce time to develop, you can give me a cup of coffee
 
 * [Magento 2 Product Banner](https://magepow.com/magento-banner-slider.html)
 
-**[Our Magento services](https://magepow.com/magento-services.html)**
+**[Our Magento 2 services](https://magepow.com/magento-services.html)**
 
 * [PSD to Magento 2 Theme Conversion](https://magepow.com/psd-to-magento-theme-conversion.html)
 
