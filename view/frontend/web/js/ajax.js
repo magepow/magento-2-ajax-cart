@@ -217,8 +217,10 @@ define([
 
             _showPopup: function (_qsModal, _qsModalContent, data) {
                 self = this;
-                if($('.modals-quickview')){
-                    $('.modals-quickview').remove();
+                var body = $('body');
+                if(body.hasClass('open-quickview')){
+                    body.removeClass('open-quickview');
+                    body.find('.modals-quickview').remove();
                 }
                 if(_qsModal.length) $('#modals_ajaxcart').html(_qsModalContent);                
                 _qsModal.html(data);
