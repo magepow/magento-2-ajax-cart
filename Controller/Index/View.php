@@ -82,8 +82,6 @@ class View extends \Magento\Catalog\Controller\Product\View
 
     }
 
-
-
     public function execute()
 
     {
@@ -175,9 +173,11 @@ class View extends \Magento\Catalog\Controller\Product\View
                 // $page->getLayout()->removeOutputElement('root');
 
                 $product = $page->getLayout()->getOutput();
-
+                $product = str_replace("swatch-options","swatch-options-".$productId, $product);
+                $product = str_replace('data-gallery-role="gallery-placeholder"','data-gallery-role="gallery-placeholder-'.$productId.'"',$product);
+                $product = str_replace('data-gallery-role=gallery-placeholder','data-gallery-role=gallery-placeholder-'.$productId,$product);
+                // $product = str_replace('gallery-placeholder','gallery-placeholder-'.$productId, $product);
                 $this->getResponse()->setBody( $product );
-
 
             } catch (\Exception $e) {
 
