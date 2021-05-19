@@ -20,6 +20,7 @@
         <referenceBlock name="alothemes.recent.order" remove="true"/>
 
         <referenceBlock name="magepow.demo.notices" remove="true" />
+        <referenceBlock name="product.info.previousnext" remove="true"/>
         <referenceBlock name="stickycart" remove="true"/>
 
         <referenceBlock name="product.info.blog.relatedposts" remove="true"/>
