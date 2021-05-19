@@ -236,6 +236,7 @@ define([
                 }, _qsModal);
                 _qsModal.modal('openModal');
                 _qsModal.trigger('contentUpdated');
+                _qsModal.find('.loading-mask').hide();
                 _qsModal.find('.btn-continue').on('click', function() {
                     self._closePopup();
                 });
