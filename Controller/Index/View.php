@@ -100,6 +100,10 @@ class View extends \Magento\Catalog\Controller\Product\View
 
             try {
                 $product = $this->_initProduct();
+                if (!$product) {
+                    echo __('The product with ID %1 is out of stock or not visible individually', $productId);
+                    return;
+                }
                 // $page = $this->resultPageFactory->create(false, ['isIsolated' => true]);
                 $page = $this->resultPageFactory->create();
                 // $page->addHandle('catalog_product_view');
