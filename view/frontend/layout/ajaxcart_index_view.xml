@@ -12,6 +12,7 @@
         
         <referenceBlock name="breadcrumbs" remove="true"/>
         <referenceBlock name="authentication-popup" remove="true" />
+        <referenceBlock name="cookie-status-check" remove="true"/>
         <referenceBlock name="catalog.product.related" remove="true"/>
         <referenceBlock name="product.info.upsell" remove="true"/>
 
