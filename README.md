@@ -55,7 +55,7 @@ Magento 2 Ajax Cart Extension is responsive with all browsers and devices. In ad
 
 ### Pro version with outstanding features
 
-| Features  | Free Version  | Pro Version |
+| Features  | Standard Version  | Pro Version |
 | :------------ |:---------------:| :-----:|
 |Ajax add to cart|:white_check_mark:|:white_check_mark:|
 |2 amazing popup templates|X|:white_check_mark:|
