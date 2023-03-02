@@ -1,3 +1,5 @@
+[<img src="https://github.com/magepow/themeforest/blob/master/shopify/shopify_affiliate.jpg" >](https://shopify.pxf.io/VyL446)
+
 ## Magento 2 Ajax Cart Extension
 
 **[Magento 2 Ajax add to cart extension by Magepow](https://magepow.com/magepow/magento-2-ajax-add-to-cart.html)** is a module that allows customers to add products to their shopping cart on the homepage, category page, product page, CMS, or any page on the website through the Ajax pop-up window without having to redirect to another page. Completely reduce redirect wait times and improve the shopping experience.
